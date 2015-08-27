@@ -1,0 +1,42 @@
+Miercoles 12 de Agosto de 2015
+Temas: Funciones. Prototipos. Parámetros por valor. Punteros. Parámetros por referencia. Uso del
+entorno de desarrollo. Ejercitación.
+Depurador linea por linea F7 y F8, depura también las funciones.
+¿Como abrir la libreria <stdio.h>?
+Archivos de cabecera .h (head) donde se alojan los prototipos.
+Biblioteca, agrupacion de funciones.
+  stdio.h => standar input/output
+
+Manual de estilos de programación con calidad.
+=============================================
+# No imprimir el resultado de la función dentro de la función. Siempre es conveniente retornar el dato al manin()
+# No utilizar scanf() o captura de datos dentro de la función.
+# Pasar como parametro lo estrictamente necesario, no más.
+# No es correcto salir de una función "return" desde dentro de un ciclio (for, while).
+
+Pasaje de parametros por valor y referencia.
+===========================================
+  Las variables simple son pasadas por valor.
+  Las variables complejas como vectores, son pasadas por referencia.
+Para poder pasar una variable simple por referencia es necesario utilizar los punteros.
+
+
+Punteros:
+========
+  Un puntero es una variable, que almacena una dirección de memoria.
+
+Operadores de puntero:
+=====================
+& => Operador de dirección: El & aplicado a una variable devuelve la dirección en memoria de la variable.
+* => Operador de indirección: El * aplicado a un puntero devuelve el valor almacenado en la zona de memoria a la que apunta el puntero.
+
+a = 3;
+ptr a;
+
+&a = direccionMemoria;
+*ptr = 3;
+&ptr = direccionMemoriaDelPuntero;
+*a = Ilegal;
+
+
+#pragma warning(disable:4996) //desactiva el warning de scanf

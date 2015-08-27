@@ -1,0 +1,9 @@
+Final: 
+Había que crear un txt con información sobre libros separada por ";", siendo cada renglón algo así:
+Código;ISBN;Precio;Título (estos campos no tenían tamaño fijo)
+Ej:
+A-1-452;94535667;$ 65.00;"El libro de la vida, la esperanza de los vampiros"
+A-1-463;9543464532X;$ 33.54;"Había una vez un examen de mierda 2: me cago en todo."
+etc.
+
+La onda era leer ese archivo, y listar por pantalla todos los libros de una misma zona de origen que preguntara por pantalla (la zona de origen son los 3 primeros números del ISBN, x ej: 954) y a su vez mostrarlos ordenados por precio de menor a mayor, teniendo un tope mínimo de precios que también se ingresaba por pantalla (léase, los mayores a X precio, mostrarlo de más barato a más caro)

@@ -1,0 +1,14 @@
+argto
+peras
+ 7/ 7/2010
+4.50
+54
+peras.jpg
+
+brato
+manzanas
+ 3/ 7/2000
+2.00
+45
+manzanas.txt
+

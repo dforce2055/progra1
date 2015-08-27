@@ -1,0 +1,64 @@
+Miercoles 26 de Agosto de 2015
+Temas: Cadenas de caracteres.
+
+Cadena de caracteres:
+====================
+Un conjunto de 0 o más caracteres. En C no existen variables para guardar string (cadena de caracteres)
+Por eso se utilizan vectores de tipo char.
+
+Tabla de caracteres:
+-------------------
+Código ASCII (American Standar Code for Information Interchange)
+
+  0   48
+  1   49
+  9   57
+  @   64
+  A   65
+  B   66
+  Z   90
+  a   97
+  b   98
+
+Con ASCII se puede representar hasta un máximo de 256 caracteres.
+Unicode utiliza caracteres que pesa entre 1 y 6 bytes.
+Compatible los primeros 127 caracteres con ASCII.
+Vector de caracteres:
+    H   O   L   A
+    72  79  76  65
+
+El carácter nulo o fin de cadena es '\0' = 0 en ASCII.
+Declaración de una cadena de caracteres.
+char cadena[80];
+char nombre[5] = {'M','a','x','i','\0'};
+char pais[] = "Alemania"; //constante de cadena de caracteres
+
+
+********* NO HACER | ERROR *********
+          char materia[80];
+          materia = "Programación"; XXXXXXXXXXXXXXXXX
+********* NO HACER | ERROR *********
+
+copiarCadena(materia, "Programación");
+void copiarCadena(char *destino, char *origen){
+  int i;
+  for(i = 0; origen[i]; i++) destino[i] = origen[i];
+  destino[i] = '\0'; //fin de vector
+}
+
+void concatenar(char *destino, char *origen){
+  int i, j;
+  for(i = 0; destino[i]; i++)
+        ;
+  for(j = 0; origen[j]; j++)
+    destino[i+j] = origen[j];
+  destino[i+j] = '\0';
+}
+//para agrear espacio, primero agregarlo a 1 de los parametros origen+espacio o espacio+destino
+//llamando 2 veces a la funcion, primero concatenando un espacio y luego la cadena final
+
+Arreglos de cadenas de caracteres:
+=================================
+char dias[7][10] = {"Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado"};
+
+Resolver hasta el ejercicio 6 inclusive de a practica de cadena de caracteres.

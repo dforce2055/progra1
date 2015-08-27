@@ -1,0 +1,37 @@
+Se desea crear una lista enlazada simple con los elementos de un polinomio, donde cada nodo debe contener 2 enteros,
+uno con el coeficiente y otro con el exponente correspondiente, ademas del puntero al siguiente elemento de la lista
+
+
+Se solicita escribir las siguientes funciones:
+
+
+a) Una funcion que permita ingresar el polinomio en forma de cadena de caracteres, obtenga cada termino y los almacene
+en la lista enlazada que representa al polinomio. Cada termino en la cadena de caracteres tendra el formato <signo>
+<coeficiente> X <exponente>, por ej:
+
+-3x2+2x+1
+
+Tener en cuenta que el primer termino puede no tener signo y que el termino de grado 1 no tendra exponente, mientras que el
+termino de grado 0 carecera de exponente y X
+
+
+b) Una funcion para evaluar el valor del polinomio en un punto pasado como parametro entero y devolver el resultado
+
+
+c) Una funcion que reciba como parametro un puntero a la cabeza de una lista que representa un polinomio, y calcule la
+derivada del mismo, generando el polinomio derivado como una nueva lista cuya cabeza se devuelve como valor de retorno de 
+la funcion
+
+Nota: Para derivar un polinomio multiplica el coeficiente de cada termino por su exponente, y se disminuye el exponente
+en 1 unidad
+
+Ej: 	Polinomio Original: 5x3-3x2+2x+1
+	Polinomio Derivado: 15x2-6x+2
+
+
+d) Una funcion para imprimir por pantalla el polinomio cargado en la lista. Utilizarla para imprimir el polinomio original
+y el derivado
+
+
+
+Escribir un porgrama para ingresar el polinomio como cadena de caracteres e invocar a las funciones solicitadas

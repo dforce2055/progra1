@@ -1,0 +1,12 @@
+1) Hacer una matriz (5x) que genere y muestre los siguientes numeros: 
+   5 4 3 2 1 
+   4 3 2 1 0
+   3 2 1 0 0
+   2 1 0 0 0
+   1 0 0 0 0
+
+2) Cargar un archivo y mostrar los nombres por pantalla y cuánto tiempo estuvieron en un edificio. Las personas no podian estar más de 24 horas pero sí podía pasar que entraran un día y salieran el otro (como en el tercer ejemplo). El formato del archivo es el siguiente (puede ser cargado por un editor de texto, no es necesario que el programa en sí guarde el archivo):
+
+Perez, Juan#10:45#18:00
+Sanchez, María#08:00#13:50
+Sarasa, Pedro#20:00#11:30

@@ -1,0 +1,57 @@
+Miercoles 19 de Agosto de 2015
+Temas: Arreglos unidimensionales y multidimensionales. Aritmética de punteros.
+#define _CRT_SECURE_NO_WARNINGS -> #pragma warning(disable:4996)
+Aritmética de punteros:
+======================
+ +   -
++=  -=
+++  --
+
+Pasaje de vectores como parámetro:
+=================================
+/* comentarios */
+#include <stdio.h>
+#define MAX 100
+void inicializarVector(int *v);
+int main(){
+  int i, vec[MAX];
+  inicializarVector(vec);
+
+  return 0;
+}
+
+void inicializarVector(int *v){
+  int i;
+  for(i = 0; i < MAX; i++){
+    v[i] = 0; // *(v + i) = 0;
+  }
+}
+
+Matrices:
+========
+Matriz bi-dimencional, con 2 o más subindices. Hasta un máximo de 7 dimemsiones.
+matriz[0][0];
+
+Números al azar(aleatorios):
+===========================
+#include <stdlib.h>
+rand() -> [0..RANDMAX)
+moneda = rand() % 2; //aplicamos el resto de dividir por 2 a moneda.
+dado = rand()% 6 + 1; //rango de 0 a 5 + 1, seria de 1 a 6.
+
+formular para números al azar:
+-----------------------------
+Genera numeros al azar en determinado rango
+
+rand()%(valorFinal - valorInicial + 1) + valorInicial;
+#dado
+rand()%(1 - 1 + 1) + 1 -> rand() % 6 + 1;
+
+Cambiar la semilla:
+------------------
+#include <time.h>
+Es el valor de inicialización para rand()
+Se ejecuta una sola vez en el programa, siempre después de declarar las variables.
+Fuera de un ciclo.
+time(NULL) -> time_t devuelve un entero sin signo | castear el valor devuelto con (int)
+srand((int)time(NULL));

@@ -1,0 +1,10 @@
+a mi en el parcial del 2011 me tomo 1 ejecrcicio de matriz N x N (con define max)
+10000
+11000
+12100
+13210
+14531
+
+y la logica estaba en poder armar bien la matriz salvo la primer columna que hay siempre un 1 , los demas casilleros
+son la suma del casillero de arriba + el de la izq.
+
