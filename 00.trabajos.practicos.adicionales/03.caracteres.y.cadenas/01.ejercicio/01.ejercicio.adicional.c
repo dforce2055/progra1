@@ -4,7 +4,7 @@ deben alterarse.*/
 #include <stdio.h>
 void eliminarEspacios(char *cadena);
 main() {
-    char cadena[] = " el capo re bigote";
+    char cadena[] = " el capo re bigote  ";
     printf("%s\n", cadena);
     eliminarEspacios(cadena);
     printf("%s\n", cadena);
