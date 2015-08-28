@@ -1,3 +1,0 @@
-Examen 1: 
-a) Crear una matriz piramidal.
-b) un programa que tenías que introducir pagos con fecha de vencimiento y te tenía que devolver los 6 que más pronto vencían. Lo que sí, no podías almacenar más que esos 6, tenían que ir ordenándose en la inserción.

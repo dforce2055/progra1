@@ -1,5 +1,0 @@
-arg ARGE
-bra BRAZ
-vez VENEZUELA
-col colombia
-cos costarica

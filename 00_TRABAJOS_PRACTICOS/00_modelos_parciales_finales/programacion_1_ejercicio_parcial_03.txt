@@ -1,2 +1,0 @@
-Examen 2:
-Te daban el archivo "directorio.txt", con la información de una carpeta, como si pusieras en DOS "dir", con el listado de todos los archivos y subcarpetas que tiene. Lo que había que hacer, era leerlo y devolver por pantalla todos los archivos que pesaran más de 1 Mb (o sea, había que leer todas las líneas, quedarte sólo con las que pertenecieran a un archivo, y guardar los que pesaran más de 1 Mb)
