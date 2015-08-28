@@ -4,6 +4,7 @@ del octavo dígito. Si la cantidad de dígitos no es múltiplo de ocho agregar d
 la cadena caracteres ‘0’ hasta que la misma sea múltiplo de 8.
   Ejemplos: 472348237388539055823012   ->    4723-4823 7388-5390 5582-3012
             8237388539055823012        ->    0000-0823 7388-5390 5582-3012
+
  */
 #include <stdio.h>
 char * formateaArreglo(char *arreglo);
@@ -21,6 +22,8 @@ int main(){
 char * formateaArreglo(char *arreglo){
   char * agregarCeros(char *arreglo, int largo, int cantCeros);
   char * agregarGuiones(char *arreglo, int largo);
+  char * agregarEspacios(char *arreglo, int largo);
+
   int i, largo, agregar = 0;
   for(largo = 0; arreglo[largo]; largo++);
   if(largo % 8 != 0){
@@ -32,6 +35,9 @@ char * formateaArreglo(char *arreglo){
   //printf("LARGO: %d", largo);
 
   arreglo = agregarGuiones(arreglo, largo);
+  for(largo = 0; arreglo[largo]; largo++);
+  //printf("LARGO:[%d]\n", largo);
+  arreglo = agregarEspacios(arreglo, largo);
 
   return arreglo;
 }
@@ -46,14 +52,34 @@ char * agregarCeros(char *arreglo, int largo, int cantCeros){
   return arreglo;
 }
 char * agregarGuiones(char *arreglo, int largo){
-  char nuevoArreglo[largo+1];
-  int i, j;
-  while(arreglo[i]){
-    for(j = 0; j < largo; j++) nuevoArreglo[j] = arreglo[j];
-    i++;
+  char nuevoArreglo[largo*2];
+  int i = 0, j = 0, contador;
+  mostrarArreglo(arreglo);
+  for(contador = 1; arreglo[i]; i++, j++, contador++){
+    if(contador % 4 == 0 && contador %8 != 0){
+      nuevoArreglo[j] = arreglo[i];
+      j++;
+      nuevoArreglo[j] = '-';
+    }else nuevoArreglo[j] = arreglo[i];
   }
-  printf("LARGO: %d\n", largo);
+  nuevoArreglo[j] = '\0';
   arreglo = nuevoArreglo; //el puntero de arreglo ahora apunta al nuevo arreglo
+  return arreglo;
+}
+char * agregarEspacios(char *arreglo, int largo){
+  char nuevoArreglo[largo+100];
+  int i = 0, j = 0, contador;
+  mostrarArreglo(arreglo);
+  for(contador = 1; arreglo[i]; i++, j++, contador++){
+    if(contador % 9 == 0){
+      nuevoArreglo[j] = arreglo[i];
+      j++;
+      nuevoArreglo[j] = ' ';
+    }else nuevoArreglo[j] = arreglo[i];
+  }
+  nuevoArreglo[j] = '\0';
+  arreglo = nuevoArreglo; //el puntero de arreglo ahora apunta al nuevo arreglo
+  //printf("LARGO:[%d]\n", largo);
   return arreglo;
 }
 void mostrarArreglo(char *arreglo){
