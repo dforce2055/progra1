@@ -13,8 +13,11 @@ void mostrarArreglo(char *arreglo);
 int main(){
   char arreglo[]  = "8237388539055823012";
   char *pArreglo = arreglo;
+  
+  printf("Arreglo Original:\n====================\n");
   mostrarArreglo(pArreglo);
   pArreglo = formateaArreglo(pArreglo);
+  printf("\nArreglo Formateado:\n=====================\n");
   mostrarArreglo(pArreglo);
 
   return 0;
@@ -32,11 +35,10 @@ char * formateaArreglo(char *arreglo){
   }
   for(i = 0; arreglo[i]; i++);
   largo = i + (i / 4);//le agrego a largo la cantidad de 0 y de espacios a agregar
-  //printf("LARGO: %d", largo);
 
   arreglo = agregarGuiones(arreglo, largo);
+  
   for(largo = 0; arreglo[largo]; largo++);
-  //printf("LARGO:[%d]\n", largo);
   arreglo = agregarEspacios(arreglo, largo);
 
   return arreglo;
@@ -54,7 +56,7 @@ char * agregarCeros(char *arreglo, int largo, int cantCeros){
 char * agregarGuiones(char *arreglo, int largo){
   char nuevoArreglo[largo*2];
   int i = 0, j = 0, contador;
-  mostrarArreglo(arreglo);
+  
   for(contador = 1; arreglo[i]; i++, j++, contador++){
     if(contador % 4 == 0 && contador %8 != 0){
       nuevoArreglo[j] = arreglo[i];
@@ -69,7 +71,6 @@ char * agregarGuiones(char *arreglo, int largo){
 char * agregarEspacios(char *arreglo, int largo){
   char nuevoArreglo[largo+100];
   int i = 0, j = 0, contador;
-  mostrarArreglo(arreglo);
   for(contador = 1; arreglo[i]; i++, j++, contador++){
     if(contador % 9 == 0){
       nuevoArreglo[j] = arreglo[i];
@@ -79,7 +80,6 @@ char * agregarEspacios(char *arreglo, int largo){
   }
   nuevoArreglo[j] = '\0';
   arreglo = nuevoArreglo; //el puntero de arreglo ahora apunta al nuevo arreglo
-  //printf("LARGO:[%d]\n", largo);
   return arreglo;
 }
 void mostrarArreglo(char *arreglo){
