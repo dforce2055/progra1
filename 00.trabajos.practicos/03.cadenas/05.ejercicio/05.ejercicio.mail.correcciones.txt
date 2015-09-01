@@ -1,0 +1,27 @@
+/*Hola Diego,
+Te envío las correcciones.
+Correcciones que no hacen al funcionamiento, sino al entendimiento del programa.
+1 - Escribir una sentencia por renglón.
+
+Correcciones
+1 - Los prototipos deben colocarse antes de comenzar el main. Si se coloca dentro de la
+  función, solo lo podrá ver la misma.
+1.1 En programación estructurada todos los prototipos deben estar en la cabecera
+  
+2 - Las cadenas deben tener el tamaño antes de empezar a compilar, y su tamaño no puede
+  modificarse.
+2.1 Ok, defino el tamaño, no me resulta muy dinamo el programa, más bien estatico 
+  y limitado.
+  
+3 - El tamaño de un vectopr o cadena no puede estar en una variable o un parámetro.
+3.1 Entendido.
+
+4 - Es incorrecto devolver la dirección de un vector que fue declarado en una función,
+  pues al terminar esta, ese vector se destruye. (esto es probable que modifique el algoritmo)
+  No está corregido.
+4.1 Entendio, cambio el algoritmo, al definir el tamaño del vector a un valor 
+  estatico, siempre para por referencia el vector declarado en main().
+
+
+Saludos,
+Patricia*/
