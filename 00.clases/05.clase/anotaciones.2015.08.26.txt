@@ -47,3 +47,5 @@ De Caracter a Número:
 ==================
 char c = 3;
 int n = c - 48; //valor ASCII para que sea el correcto numero.
+
+fflus(stdin) -> fget(stdin) (siempre después del scanf)

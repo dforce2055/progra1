@@ -5,8 +5,8 @@ del octavo dígito. Si la cantidad de dígitos no es múltiplo de ocho agregar d
 la cadena caracteres '0' hasta que la misma sea múltiplo de 8.
   Ejemplos: 472348237388539055823012    ->    4723-4823 7388-5390 5582-3012
             8237388539055823012         ->    0000-0823 7388-5390 5582-3012
-
  */
+/* tratar de rehacerlo utilizando metodo de corrimientos */
 #include <stdio.h>
 //todas los propotipos de las funciones deben estar en la cabecera. Normativa 
 // de Programación estructurada.
