@@ -1,4 +1,4 @@
-/* 7. Hacer una función que permita insertar una sub-cadena en una cadena a partir de una posición dada. */
+/* 7. Hacer una funciÃ³n que permita insertar una sub-cadena en una cadena a partir de una posiciï¿½n dada. */
 /* tratar de rehacerlo utilizando metodo de corrimientos */
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
