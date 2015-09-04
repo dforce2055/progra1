@@ -9,12 +9,12 @@ int main(){
   char texto[256];
   int numero;
   
-  deNumeroACadena(119, cadena);
-  sscanf(cadena, "%d", &numero);
-  sprintf(texto, "%s", cadena+4);
-  printf("numero: %d\n",numero);
-  printf("texto: %s\n", texto);
+  //sscanf(cadena, "%d", &numero);
+  //sprintf(texto, "%s", cadena+4);
+  //printf("numero: %d\n",numero);
+  //printf("texto: %s\n", texto);
   
+  deNumeroACadena(119, cadena);
   
   if(*cadena != '\0') puts(cadena);
   else puts("Error el numero ingresado es mayor a 999");
