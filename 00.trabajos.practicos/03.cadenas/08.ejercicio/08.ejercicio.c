@@ -1,4 +1,5 @@
-/* 8. Hacer una función que permita eliminar una sub-cadena a partir de una posición y un tamaño dados. */
+/* 8. Hacer una función que permita eliminar una sub-cadena a partir de una 
+posición y un tamaño dados. */
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
