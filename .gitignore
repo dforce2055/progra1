@@ -2,3 +2,7 @@
 /00_CLASES/
 /00_LIBROS/
 /00_TRABAJOS_PRACTICOS/
+
+#No incluir archivos abiertos
+*~
+*.lock
