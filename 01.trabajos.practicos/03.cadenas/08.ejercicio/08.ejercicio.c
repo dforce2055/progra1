@@ -5,10 +5,10 @@ posición y un tamaño dados. */
 #include <ctype.h>
 void eliminarSub(char *cadena, char *subCadena, int posicion);
 int main(){
-  char cadena[100] = "Esto es un placer horror!";
+  char cadena[256] = "Esto es un placer horror!asd";
   char subCadena[] = " horror";
-  char subCadena2[] = "placer";
-  eliminarSub(cadena, subCadena, 17);
+  char subCadena2[] = " placer";
+  eliminarSub(cadena, subCadena2, 10);
   puts(cadena);
 
   return 0;
@@ -16,9 +16,16 @@ int main(){
 void eliminarSub(char *cadena, char *subCadena, int posicion){
   char *pCadena = cadena + posicion;
   char *pSubCadena = pCadena + strlen(subCadena);
+  char buffer[256];
+  int i;
 
-  if(strcmp(pCadena, subCadena))
+  for(i = 0 ; i <= strlen(subCadena)-1; i++){//guardo en buffer la subcadena extraida de cadena
+    buffer[i] = *(pCadena+i);
+  }
+
+  if(strcmp(buffer, subCadena) == 0){//comparo buffer con subcadena, si strcmp == 0 son cadenas identicas
     for( ; *pSubCadena != '\0'; pCadena++, pSubCadena++) *pCadena = *pSubCadena;
     *pCadena = '\0';
+  }
 }
 //MAL REHACER NO SE COMPARA LA CADENA CORRECTAMENTE
