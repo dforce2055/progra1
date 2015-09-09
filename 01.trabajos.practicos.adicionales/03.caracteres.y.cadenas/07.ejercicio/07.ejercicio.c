@@ -30,4 +30,9 @@ char *strsub(char *s,int d,int n){
   
   return(pSubCadena);
 }
-/* error detectado, se esta modificando el string de main cadena[256] */
+/* error detectado, se esta modificando el string de main cadena[256] 
+  Si quiero modificar una cadena en una función, y quiero devolver un puntero
+  a esa cadea,¿Es esto correcto?¿Las variables declaradas en una función terminan
+  al terminar la llamanda a la función?
+  Si utilizo void, modifico el string de main
+*/
