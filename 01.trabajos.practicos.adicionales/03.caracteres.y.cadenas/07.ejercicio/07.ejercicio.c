@@ -11,6 +11,9 @@ int main(){
   char cadena[256] = "El  número  de  teléfono  es  4356-7890.";
   char *subCadena = strsub(cadena, 32, 9);
   
+  puts(cadena);
+  //puts(subCadena);
+  
   if(subCadena[0] != '\0') puts(subCadena);
   else puts("Error");
   return 0;
@@ -27,3 +30,4 @@ char *strsub(char *s,int d,int n){
   
   return(pSubCadena);
 }
+/* error detectado, se esta modificando el string de main cadena[256] */
