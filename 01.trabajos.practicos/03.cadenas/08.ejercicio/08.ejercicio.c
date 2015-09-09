@@ -20,12 +20,12 @@ void eliminarSub(char *cadena, char *subCadena, int posicion){
   int i;
 
   for(i = 0 ; i <= strlen(subCadena)-1; i++){//guardo en buffer la subcadena extraida de cadena
-    buffer[i] = *(pCadena+i);
+    buffer[i] = *pCadena;
+    pCadena++;
   }
-
+  pCadena = cadena + posicion;//puntero retoma posición original
   if(strcmp(buffer, subCadena) == 0){//comparo buffer con subcadena, si strcmp == 0 son cadenas identicas
     for( ; *pSubCadena != '\0'; pCadena++, pSubCadena++) *pCadena = *pSubCadena;
     *pCadena = '\0';
   }
 }
-//MAL REHACER NO SE COMPARA LA CADENA CORRECTAMENTE
