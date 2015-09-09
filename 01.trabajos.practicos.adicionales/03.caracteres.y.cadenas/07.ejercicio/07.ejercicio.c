@@ -7,29 +7,34 @@ caracteres.  */
 /* REHACER EJERCICIO */
 #include <stdio.h>
 #include <string.h>
-char *strsub(char *s,int d,int n);
+char *strsub(char *s,int d,int n, char *subC);
 int main(){
   char cadena[256] = "El  número  de  teléfono  es  4356-7890.";
-  char *subCadena = strsub(cadena, 32, 9);
+  char *pSubCadena;
+  strsub(cadena, 32, 9, pSubCadena );
 
   puts(cadena);
-  //puts(subCadena);
 
-  if(subCadena[0] != '\0') puts(subCadena);
+  if(pSubCadena[0] != '\0') puts(pSubCadena);
   else puts("Error");
   return 0;
 }
-char *strsub(char *s,int d,int n){
-  char *pSubCadena = s;
-  char *pFinSubCadena;
+char *strsub(char *s,int d,int n, char *subC){
+  char *pCadena = s;
+  char *pSubC = subC;
 
   if(strlen(s) > d + n){//si el largo de la cadena es mayor posición+cant.caracteres
-    pSubCadena = pSubCadena+d;//corro hasta llegar a la posición cadena+d
-    pFinSubCadena = pSubCadena+n;//le asigno la dirección final a pSubCadena
-    *pFinSubCadena = '\0';
-  }else *pSubCadena = '\0';
+    pCadena = pCadena+d;//corro hasta llegar a la posición cadena+d
+    while(n>0){//copio caractér x caractér hasta cumplir con la cantidad solicitada n
+      *pSubC = *pCadena;
+      pCadena++;
+      pSubC++;
+      n--;
+    }
+    *pSubC = '\0';
+  }else *pSubC = '\0';
 
-  return(pSubCadena);
+  return(pSubC);
 }
 /* error detectado, se esta modificando el string de main cadena[256]
   Si quiero modificar una cadena en una función, y quiero devolver un puntero

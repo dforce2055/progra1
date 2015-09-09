@@ -6,3 +6,4 @@
 #No incluir archivos abiertos
 *~
 *.lock
+*.o
