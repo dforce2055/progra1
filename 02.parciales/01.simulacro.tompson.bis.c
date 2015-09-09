@@ -6,7 +6,7 @@ negativo. No confundir convertir a cadena con convertir a palabras. */
 #include <stdio.h>
 char *enteroACadena(int entero, char *cadena);
 int main(){
-  int numero = -120;
+  int numero = 1201;
   char cadena[256];
   enteroACadena(numero, cadena);
 
@@ -17,12 +17,45 @@ int main(){
 char *enteroACadena(int entero, char *cadena){
   //Inserta en un vector de cadenas pasado por parametro, la representacion en
   //caracter del entero (positivo o negativo) pasado por parametro
-    char const digito[] = "0123456789";
-    char *pCadena = cadena;
-    if(entero<0){//si el numero es negativo, inserto un signo '-' al principio de la cadena
-        *pCadena++ = '-';
-        entero *= -1;//hago positivo el número
-    }
+  char *pCadena = cadena;
+  if(entero<0){//si el numero es negativo, inserto un signo '-' al principio de la cadena
+    *pCadena++ = '-';
+    entero *= -1;//hago positivo el número
+  }
+  puts(pCadena);
+  int unidades = entero;
+  do{ //Muevo el puntero hasta que el número no sea divisible / 10, es decir mayor a 0
+    ++pCadena;
+    unidades = unidades/10;
+  }while(unidades);
+  *pCadena = '\0';
+
+  do{
+    pCadena--;
+    *pCadena = entero % 10 + 48;//+48 para representar el caracter ASCII del numero obtenido 48 = 0(char)
+    entero = entero/10;
+  }while(entero);
+  //cadena[3] = 'a';
+
+  //printf("%c", pCadena);
+  /*
+  int unidades = entero;
+  while(unidades){
+    pCadena++;
+    unidades = unidades/10;
+  }
+  *pCadena = '\0';
+  pCadena--;
+
+  while(entero){
+    *pCadena = entero % 10;
+    entero = entero/10;
+    pCadena--;
+  }*/
+
+
+
+   /*
     int unidades = entero;
     do{ //Muevo el puntero hasta que el número no sea divisible / 10, es decir mayor a 0
         ++pCadena;
@@ -33,5 +66,6 @@ char *enteroACadena(int entero, char *cadena){
         *--pCadena = digito[entero%10];
         entero = entero/10;
     }while(entero);
+    */
     return cadena;
 }

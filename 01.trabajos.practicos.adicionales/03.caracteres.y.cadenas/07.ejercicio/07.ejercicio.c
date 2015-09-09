@@ -41,26 +41,27 @@ char *strsub(char *s,int d,int n){
   Siempre que necesites devolver una cadena, tenes que pasarla como parametro!!!!
   Ejemplo:
 
-  char *enteroACadena(int entero, char cadena[]){
+  char *enteroACadena(int entero, char *cadena){
   //Inserta en un vector de cadenas pasado por parametro, la representacion en
   //caracter del entero (positivo o negativo) pasado por parametro
     char const digito[] = "0123456789";
     char *pCadena = cadena;
     if(entero<0){//si el numero es negativo, inserto un signo '-' al principio de la cadena
         *pCadena++ = '-';
-        entero *= -1;
+        entero *= -1;//hago positivo el número
     }
-    int shifter = entero;
+    int unidades = entero;
     do{ //Muevo el puntero hasta que el número no sea divisible / 10, es decir mayor a 0
         ++pCadena;
-        shifter = shifter/10;
-    }while(shifter);
+        unidades = unidades/10;
+    }while(unidades);
     *pCadena = '\0';
     do{ //De atras hacia delante voy insertando el caracter correspondiente en la posición de puntero
         *--pCadena = digito[entero%10];
         entero = entero/10;
     }while(entero);
     return cadena;
+}
 }
 
 
