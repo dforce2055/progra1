@@ -12,7 +12,7 @@ int main(){
   char cadena[] = "Hola mundo!";
   char *subCadena;
 
-  subCadena = strright(cadena, 15);
+  subCadena = strright(cadena, 7);
   puts(subCadena);
 
   return 0;
