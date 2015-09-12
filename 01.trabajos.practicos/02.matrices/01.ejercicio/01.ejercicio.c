@@ -13,7 +13,7 @@ void cargar(int *pMatriz);
 void mostrar(int *pMatriz);
 int main(){
   int matriz[FIL][COL];
-  int *pMatriz = &matriz[0][0];
+  int *pMatriz = (int*)matriz;
 
   puts("Ingrese numeros a la matriz:");
   cargar(pMatriz);
