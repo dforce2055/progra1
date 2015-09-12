@@ -1,48 +1,35 @@
 /* 1. Realizar una función que permita cargar con números enteros, una matriz de 5x5,
 ingresando los datos desde teclado. ¿En qué cambiaría la función si la matriz
 contuviera otro tipo de datos y/o tuviese otras dimensiones? */
-/* BUSCAR PUNTEROS A MATRIZ EN C*/
+/*
+  Si contuviera otro tipo de datos, deberia cambiar la forma que guarda e
+  imprime cada elemento de la matriz.
+  Si la matriz cambia de dimensiones se define en FIL y COL adaptandose dentro de
+  main.*/
 #include <stdio.h>
 #define FIL 5
 #define COL 5
-#define SIZE 25
-void cargarMatriz(int matriz[][COL]);
-int matrizLLena(void);
-void printMatriz(int matriz[][COL]);
-
-int valor;
-int matriz[5][5];
-int f = 0, c = 0, contador = 0;
-
+void cargar(int *pMatriz);
+void mostrar(int *pMatriz);
 int main(){
+  int matriz[FIL][COL];
+  int *pMatriz = &matriz[0][0];
 
-  printf("ingrese un número distinto a 0: ");
-  scanf("%d",&valor);
-  while(valor != 0 && !matrizLLena()){
-    cargarMatriz(matriz);
-    printf("ingrese un número distinto a 0: ");
-    scanf("%d",&valor);
-  }
-  printMatriz(matriz);
-
-  return;
+  puts("Ingrese numeros a la matriz:");
+  cargar(pMatriz);
+  mostrar(pMatriz);
+  return 0;
 }
-void cargarMatriz(int matriz[][COL]){
-  matriz[f][c] = valor;
-  if(c != 0 && c % 4 == 0){
-    f++;
-    c = 0;
-  }else c++;
-  contador++;
+void cargar(int *pMatriz){
+  int *pFinMatriz = pMatriz + FIL*COL;
+  for(; pMatriz != pFinMatriz; pMatriz++) scanf("%d", pMatriz);
 }
-int matrizLLena(void){
-  return (contador == (FIL * COL))?1:0;
-}
-void printMatriz(int matriz[][COL]){
-  int i, j;
-  for(i = 0; i < FIL; i++){
-    for(j = 0; j < COL; j++){
-      printf("%d", matriz[i][j]);
+void mostrar(int *pMatriz){
+  int f,c;
+  for(f = 0; f < FIL; f++){
+    for(c = 0; c < COL; c++){
+      printf("%4d", *pMatriz);
+      pMatriz++;
     }
     printf("\n");
   }
