@@ -9,6 +9,7 @@ contuviera otro tipo de datos y/o tuviese otras dimensiones? */
 #include <stdio.h>
 #define FIL 5
 #define COL 5
+#include <stdio.h>
 void cargar(int *pMatriz);
 void mostrar(int *pMatriz);
 int main(){

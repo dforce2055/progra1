@@ -6,6 +6,7 @@ con respecto a su diagonal principal. */
    3   4  9
 */
 #define N 5
+#include <stdio.h>
 int simetria(int matriz[][N]);
 int main(){
   int matriz[N][N] = {1, 2, 3, 4, 5,
@@ -14,7 +15,6 @@ int main(){
                       4, 1, 2, 3, 0,
                       5, 0, 0, 0, 0,
                       };
-  int *pMatriz = (int *)matriz;
 
   if(simetria(matriz)) puts("Es simetrica");
   else puts("No son simetricas");
