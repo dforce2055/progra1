@@ -1,4 +1,5 @@
-/* 3. Realice una función devuelva verdadero si todas sus columnas de una matriz son palíndromos.
+/* 3. Realice una función devuelva verdadero si todas sus columnas de una matriz
+son palíndromos.
 Ejemplos:
   1221233423341221 -> Para esta matriz la función devuelve verdadero
   1221233233331111 -> Para esta matriz la función devuelve falso
