@@ -2,25 +2,34 @@
     a) Intercambiar dos filas cualquiera.
     b) Intercambiar dos columnas cualesquiera.
     c) Intercambiar una fila y una columna dada
+    d) Transponer la matriz sobre si misma
 */
 #include <stdio.h>
-#define FIL 4
-#define COL 4
+#define FIL 3
+#define COL 3
 void mostrar(int *matriz);
 void swapFilas(int matriz[FIL][COL], int fDest, int fOrig);
 void swapColumnas(int matriz[FIL][COL], int cDest, int cOrig);
 void swapFilCol(int matriz[FIL][COL], int fil, int col);
+void transponer(int matriz[FIL][COL]);
 int main(){
-  int matriz[FIL][COL] = {  1, 2, 3, 4,
-                            2, 0, 0, 2,
-                            1, 0, 1, 0};
+  int matriz[FIL][COL] = {  1, 2, 3,
+                            4, 5, 6,
+                            7, 8, 9};
 
+  puts("Matriz original:");
   mostrar((int *)matriz);
   swapFilas(matriz, 0, 1);
+  puts("\nCambio de filas");
   mostrar((int *)matriz);
   swapColumnas(matriz, 0, 1);
+  puts("\nCambio de columnas");
   mostrar((int *)matriz);
   swapFilCol(matriz, 1, 0);
+  puts("\nCambio de columnas por filas:");
+  mostrar((int *)matriz);
+  transponer(matriz);
+  puts("\nMatriz transpuesta:");
   mostrar((int *)matriz);
 
   return 0;
@@ -58,13 +67,25 @@ void swapFilCol(int matriz[FIL][COL], int fil, int col){
   for(i = 0; i < FIL; i++) fila[i] = matriz[fil][i];
   //copiar columna
   for(i = 0; i < COL; i++) columna[i] = matriz[i][col];
-
-  for(i = 0; i < FIL; i++){
-    matriz[fil][i] = columna[i];
+  //copio columna a fil
+  for(i = 0; i < FIL; i++) matriz[fil][i] = columna[i];
+  //copi fila a columna
+  for(i = 0; i < COL; i++) matriz[col][i] = fila[i];
+  //se sobreescriben en la intersección
+}
+void transponer(int matriz[FIL][COL]){
+  int aux[FIL][COL];
+  int fil, col;
+  //copia de matrices
+  for(fil = 0; fil < FIL; fil++){
+    for(col = 0; col < COL; col++){
+      aux[fil][col] = matriz[fil][col];
+    }
   }
-
-  for(i = 0; i < COL; i++){
-    matriz[col][i] = fila[i];
+  //transponer
+  for(col = 0; col < COL; col++){
+    for(fil = 0; fil < FIL; fil++){
+      matriz[fil][col] = aux[col][fil];
+    }
   }
-
 }
