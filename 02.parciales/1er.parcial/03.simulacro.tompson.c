@@ -15,13 +15,13 @@ void generar(int matriz[N][N]);
 void mostrar(int *matriz);
 int main(){
   int matriz[N][N] = {0};
-
+  
   puts("Vacia:");
   mostrar((int *)matriz);
   generar(matriz);
   puts("\nGenerar:");
   mostrar((int *)matriz);
-
+  
 }
 void mostrar(int *matriz){
   int *pFin = matriz + N * N;
@@ -39,12 +39,12 @@ void generar(int matriz[N][N]){
       matriz[fil][col] = i;
     }
   }
-
+  
   for(fil = 0, i = 0; fil < ceros+3; fil++, ceros -=2, i++){
     for(col = 0; col < ceros; col++){
       matriz[fil][col+i] = 0;
       matriz[fil][col+i] = 0;
     }
-
+    
   }
 }
