@@ -1,83 +1,47 @@
 /* Ingresar a través del teclado una frase cualquiera, la que podrá tener hasta
 un máximo de 100 palabras. Luego se solicita desarrollar un programa que
 realice las siguientes tareas.
-
   1. Mostrar la frase por pantalla, pero encerrado entre paréntesis aquellas
   palabras donde la cantidad de vocales supere el 50% del total de los
   caracteres de la misma.
-
   2. Imprimir por pantalla las palabras que cumplan con la condición indicada
   en el punto anterior, mostrándolas en orden alfabético y sin paréntesis.
-
 Nota:
   # Se considera palabra a un conjunto de uno o más caracteres seguidos de uno o
     más espacios al principio o al final.
-
   # Las vocales con tilde no se consideran.
 */
-<<<<<<< HEAD
-#pragma warning(disable:4996)
-#pragma warning(disable:638)
+#define PALABRAS 100
+#define LETRAS 35 //cantidad máxima de caracteres en una palabra de español
+#define MAX 35 //cantidad máxima de caracteres en una frase
 #include <stdio.h>
 #include <string.h>
-#include <ctype.h>
-int leerCadena(char *cadena, int n);
-int main(){
-  char frase[1000];
-
-  
-  if(leerCadena(frase,1000)){
-    puts("Usted dijo:");
-    puts(frase);
-  }else puts("error al leer la cadena");
-
-  return 0;
-}
-int leerCadena(char *cadena, int n) {
-    int i, c;
-
-    c = getchar();
-    if (c == EOF) {
-        cadena[0] = '\0';
-        return 0;
-    }
-
-    if (c == '\n')
-        i = 0;
-    else {
-        cadena[0] = c;
-        i = 1;
-    }
-
-    for (; i < n-1 && (c=getchar())!=EOF && c!='\n'; i++)
-       cadena[i] = c;
-
-    cadena[i] = '\0';
-
-    if (c != '\n' && c != EOF)
-        while ((c = getchar()) != '\n' && c != EOF);
-
-    return 1;
-}
-=======
-#include <stdio.h>
-#include <string.h>
-void mostrar(char *cadena);
-void mostrarPalabra(char *cadena);
 int cargarFrase(char *cadena, int n);
+int parentesis(char *cadena, char palabras[LETRAS][PALABRAS]);
+void mostrarPalabra(char *cadena);
+void mostrarPalabras(char palabras[LETRAS][PALABRAS], int cantPalabras);
 int cantVocales(char *palabra);
+void ordenarPalabras(char palabras[LETRAS][PALABRAS], int cantPalabras);
 int main(){
-  char frase[1000];
+  char frase[MAX];
+  char palabras[LETRAS][PALABRAS];
+  int cantPalabras = 0;
 
   puts("Ingrese una frase:");
-  cargarFrase(frase, 1000);
-  puts("\nfrase original:");
-  puts(frase);
-  mostrar(frase);
+  cargarFrase(frase, MAX);
+  cantPalabras = parentesis(frase, palabras);
+  ordenarPalabras(palabras, cantPalabras);
+  puts("\n\nPalabras ordenadas:");
+  puts("====================");
+  mostrarPalabras(palabras, cantPalabras);
 
   return 0;
 }
 int cargarFrase(char *cadena, int n){
+  //guarda en arreglo de caracteres los caracteres introducidos por el usuario
+  //uno x uno, hasta que palabras < PALABRAS o hasta que se llegue al límite del
+  //arreglo.
+  //Devuelve la cantidad de palabras almacenadas.
   int i, palabras = 0;
   char c;
 
@@ -95,20 +59,56 @@ int cargarFrase(char *cadena, int n){
     palabras++;
     }
 
-  for( ;palabras < 100 && i < n-1 && (c = getchar()) != EOF && c != '\n'; i++){
+  for( ;palabras < PALABRAS && i < n-1 && c != EOF && c != '\n'; i++){
     cadena[i] = c;
     if(isspace(c) && !isspace(cadena[i-1])){
       palabras++;
     }
+    c = getchar();
   }
   cadena[i] = '\0';
 
   return palabras;
 }
+int parentesis(char *cadena, char palabras[LETRAS][PALABRAS]){
+  //Guarda en arreglo de cadenas las palabras que cumplan con la condición de 
+  //mayor cantidad de vocales.
+  //Imprime por pantalla la frase con aquellas palabras que cumplen la condición
+  //encerradas entre paréntesis.
+  char cFrase[MAX];
+  char auxPalabras[LETRAS];
+  char *pCadena = cadena;
+  int i = 0, cantPalabras = 0;
+
+  strcpy(cFrase, cadena);//guarda una copia de la frase original
+  pCadena = strtok(cadena, " ");//separa la cadena en palabras
+  puts("\nPalabras entre ():");
+  puts("==================");
+  while(pCadena != NULL){
+    if(cantVocales(pCadena)){
+      strcpy(palabras[i], pCadena);//guarda en arreglo de palabras las palabras que cumplen la condición cantVocales
+      i++;
+      printf("(");
+      mostrarPalabra(pCadena);
+      printf(") ");
+    }else printf("%s ", pCadena);
+    pCadena = strtok(NULL, " ");
+  }
+  printf("\n");
+  cantPalabras = i;
+  strcpy(cadena, cFrase);//devuelvo frase a su estado original
+  return cantPalabras;
+}
 void mostrarPalabra(char *cadena){
   for(; *cadena != '\0'; cadena++) printf("%c", *cadena);
 }
+void mostrarPalabras(char palabras[LETRAS][PALABRAS], int cantPalabras){
+  int i;
+  for(i = 0; i < cantPalabras; i++) printf("%d:\t%s\n", i+1, palabras[i]);
+}
 int cantVocales(char *palabra){
+  //Detecta la cantidad de vocales en una cadena, si la cantidad de vocales 
+  //supera el 50% de la cantidad de caracteres, retorna 1, en caso negativo 0
   char *pPalabra = palabra;
   int i, vocales = 0;
   for(i = 0; *pPalabra != '\0'; pPalabra++, i++){
@@ -127,31 +127,13 @@ int cantVocales(char *palabra){
   }
   return (vocales > (i/2))?1:0;
 }
-void mostrar(char *cadena){
-  char cFrase[1000];
-  char palabras[35][100];//100 palabras con un máximo de 35 caracteres
-  char auxPalabras[35];
-  char *pCadena = cadena;
-  int i = 0, cont, j;
-
-  strcpy(cFrase, cadena);
-  pCadena = strtok(cadena, " ");//separa la cadena en palabras
-  puts("\nPalabras entre ():");
-  puts("==================");
-  while(pCadena != NULL){
-    if(cantVocales(pCadena)){
-      strcpy(palabras[i], pCadena);//guarda en arreglo de palabras las palabras que cumplen la condición cantVocales
-      i++;
-      printf("(");
-      mostrarPalabra(pCadena);
-      printf(") ");
-    }else printf("%s ", pCadena);
-    pCadena = strtok(NULL, " ");
-  }
-
-  //ordenar arreglo de palabras
-  for(cont = 0; cont < i; cont++){
-    for(j = 0; j < i-1; j++){
+void ordenarPalabras(char palabras[LETRAS][PALABRAS], int cantPalabras){
+  //ordena arreglo de palabras
+  char auxPalabras[LETRAS];
+  int i, j;
+  
+  for(i = 0; i < cantPalabras; i++){
+    for(j = 0; j < cantPalabras-1; j++){
       if(strcmp(palabras[j], palabras[j+1]) > 0){
         strcpy(auxPalabras, palabras[j]);
         strcpy(palabras[j], palabras[j+1]);
@@ -159,13 +141,4 @@ void mostrar(char *cadena){
       }
     }
   }
-
-  puts("\n\nPalabras ordenadas:");
-  puts("====================");
-  for(cont = 0; cont < i; cont++) printf("%s\n", palabras[cont]);
-
-  strcpy(cadena, cFrase);
 }
-
-
->>>>>>> b1859a4b008be741b00f28323a0a5eb4bda4ff3e
