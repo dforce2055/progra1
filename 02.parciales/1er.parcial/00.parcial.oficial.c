@@ -26,53 +26,11 @@ int main(){
 
   puts("Ingrese una frase:");
   cargarFrase(frase, 1000);
-
+  puts("\nfrase original:");
+  puts(frase);
   mostrar(frase);
 
   return 0;
-}
-void mostrarPalabra(char *cadena){
-  for(; *cadena != '\0'; cadena++) printf("%c", *cadena);
-}
-int cantVocales(char *palabra){
-  char *pPalabra = palabra;
-  int i, vocales = 0;
-  for(i = 0; *pPalabra != '\0'; pPalabra++, i++){
-    switch(*pPalabra){
-      case 'a': vocales++; break;
-      case 'A': vocales++; break;
-      case 'e': vocales++; break;
-      case 'E': vocales++; break;
-      case 'i': vocales++; break;
-      case 'I': vocales++; break;
-      case 'o': vocales++; break;
-      case 'O': vocales++; break;
-      case 'u': vocales++; break;
-      case 'U': vocales++; break;
-      }
-  }
-  return (vocales > (i/2))?1:0;
-}
-void mostrar(char *cadena){
-  char cFrase[1000];
-  char palabras[100][100];
-  char *pCadena = cadena;
-  int i = 0;
-
-  strcpy(cFrase, cadena);
-  pCadena = strtok(cadena, " ");//separa la cadena en palabras
-  while(pCadena != NULL){
-    if(cantVocales(pCadena)){
-      strcpy(palabras[i], pCadena);
-      i++;
-      printf("(");
-      mostrarPalabra(pCadena);
-      printf(") ");
-    }else printf("%s ", pCadena);
-    pCadena = strtok(NULL, " ");
-  }
-
-  strcpy(cadena, cFrase);
 }
 int cargarFrase(char *cadena, int n){
   int i, palabras = 0;
@@ -102,4 +60,66 @@ int cargarFrase(char *cadena, int n){
 
   return palabras;
 }
+void mostrarPalabra(char *cadena){
+  for(; *cadena != '\0'; cadena++) printf("%c", *cadena);
+}
+int cantVocales(char *palabra){
+  char *pPalabra = palabra;
+  int i, vocales = 0;
+  for(i = 0; *pPalabra != '\0'; pPalabra++, i++){
+    switch(*pPalabra){
+      case 'a': vocales++; break;
+      case 'A': vocales++; break;
+      case 'e': vocales++; break;
+      case 'E': vocales++; break;
+      case 'i': vocales++; break;
+      case 'I': vocales++; break;
+      case 'o': vocales++; break;
+      case 'O': vocales++; break;
+      case 'u': vocales++; break;
+      case 'U': vocales++; break;
+      }
+  }
+  return (vocales > (i/2))?1:0;
+}
+void mostrar(char *cadena){
+  char cFrase[1000];
+  char palabras[35][100];//100 palabras con un máximo de 35 caracteres
+  char auxPalabras[35];
+  char *pCadena = cadena;
+  int i = 0, cont, j;
+
+  strcpy(cFrase, cadena);
+  pCadena = strtok(cadena, " ");//separa la cadena en palabras
+  puts("\nPalabras entre ():");
+  puts("==================");
+  while(pCadena != NULL){
+    if(cantVocales(pCadena)){
+      strcpy(palabras[i], pCadena);//guarda en arreglo de palabras las palabras que cumplen la condición cantVocales
+      i++;
+      printf("(");
+      mostrarPalabra(pCadena);
+      printf(") ");
+    }else printf("%s ", pCadena);
+    pCadena = strtok(NULL, " ");
+  }
+
+  //ordenar arreglo de palabras
+  for(cont = 0; cont < i; cont++){
+    for(j = 0; j < i-1; j++){
+      if(strcmp(palabras[j], palabras[j+1]) > 0){
+        strcpy(auxPalabras, palabras[j]);
+        strcpy(palabras[j], palabras[j+1]);
+        strcpy(palabras[j+1], auxPalabras);
+      }
+    }
+  }
+
+  puts("\n\nPalabras ordenadas:");
+  puts("====================");
+  for(cont = 0; cont < i; cont++) printf("%s\n", palabras[cont]);
+
+  strcpy(cadena, cFrase);
+}
+
 
