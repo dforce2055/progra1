@@ -13,18 +13,18 @@ Nota:
 */
 #define PALABRAS 100
 #define LETRAS 35 //cantidad máxima de caracteres en una palabra de español
-#define MAX 35 //cantidad máxima de caracteres en una frase
+#define MAX 1000 //cantidad máxima de caracteres en una frase
 #include <stdio.h>
 #include <string.h>
 int cargarFrase(char *cadena, int n);
-int parentesis(char *cadena, char palabras[LETRAS][PALABRAS]);
+int parentesis(char *cadena, char palabras[PALABRAS][LETRAS]);
 void mostrarPalabra(char *cadena);
-void mostrarPalabras(char palabras[LETRAS][PALABRAS], int cantPalabras);
+void mostrarPalabras(char palabras[PALABRAS][LETRAS], int cantPalabras);
 int cantVocales(char *palabra);
-void ordenarPalabras(char palabras[LETRAS][PALABRAS], int cantPalabras);
+void ordenarPalabras(char palabras[PALABRAS][LETRAS], int cantPalabras);
 int main(){
   char frase[MAX];
-  char palabras[LETRAS][PALABRAS];
+  char palabras[PALABRAS][LETRAS];
   int cantPalabras = 0;
 
   puts("Ingrese una frase:");
@@ -59,19 +59,19 @@ int cargarFrase(char *cadena, int n){
     palabras++;
     }
 
-  for( ;palabras < PALABRAS && i < n-1 && c != EOF && c != '\n'; i++){
+  for( ;palabras < PALABRAS && (c = getchar()) != EOF && i < n-1 && c != EOF && c != '\n'; i++){
     cadena[i] = c;
     if(isspace(c) && !isspace(cadena[i-1])){
       palabras++;
     }
-    c = getchar();
+
   }
   cadena[i] = '\0';
 
   return palabras;
 }
-int parentesis(char *cadena, char palabras[LETRAS][PALABRAS]){
-  //Guarda en arreglo de cadenas las palabras que cumplan con la condición de 
+int parentesis(char *cadena, char palabras[PALABRAS][LETRAS]){
+  //Guarda en arreglo de cadenas las palabras que cumplan con la condición de
   //mayor cantidad de vocales.
   //Imprime por pantalla la frase con aquellas palabras que cumplen la condición
   //encerradas entre paréntesis.
@@ -102,12 +102,12 @@ int parentesis(char *cadena, char palabras[LETRAS][PALABRAS]){
 void mostrarPalabra(char *cadena){
   for(; *cadena != '\0'; cadena++) printf("%c", *cadena);
 }
-void mostrarPalabras(char palabras[LETRAS][PALABRAS], int cantPalabras){
+void mostrarPalabras(char palabras[PALABRAS][LETRAS], int cantPalabras){
   int i;
   for(i = 0; i < cantPalabras; i++) printf("%d:\t%s\n", i+1, palabras[i]);
 }
 int cantVocales(char *palabra){
-  //Detecta la cantidad de vocales en una cadena, si la cantidad de vocales 
+  //Detecta la cantidad de vocales en una cadena, si la cantidad de vocales
   //supera el 50% de la cantidad de caracteres, retorna 1, en caso negativo 0
   char *pPalabra = palabra;
   int i, vocales = 0;
@@ -127,11 +127,11 @@ int cantVocales(char *palabra){
   }
   return (vocales > (i/2))?1:0;
 }
-void ordenarPalabras(char palabras[LETRAS][PALABRAS], int cantPalabras){
+void ordenarPalabras(char palabras[PALABRAS][LETRAS], int cantPalabras){
   //ordena arreglo de palabras
   char auxPalabras[LETRAS];
   int i, j;
-  
+
   for(i = 0; i < cantPalabras; i++){
     for(j = 0; j < cantPalabras-1; j++){
       if(strcmp(palabras[j], palabras[j+1]) > 0){
