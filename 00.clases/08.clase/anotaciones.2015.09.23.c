@@ -49,7 +49,7 @@ void imprimirAlumno(struct sAlumno.quien){
 imprimirAlumno(alumno1);
 
 4. Pasaje de estructura por referencia:
-void inicializarAlumno(struct sAalumno *quien){
+void inicializarAlumno(struct sAlumno *quien){
   srtcpy((*quien).lu,"");
   srtcpy((*quien).nombre,"");
   srtcpy((*quien).domicilio,"");
