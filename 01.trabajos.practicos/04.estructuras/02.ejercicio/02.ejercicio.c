@@ -10,18 +10,8 @@ c)  Generar una cadena con formato hh:mm:ss
 #include <stdio.h>
 #include <string.h>
 typedef struct{
-  int dia, mes, anio;
-}tFecha;
-typedef struct{
   int hora, minuto, segundo;
 }tHora;
-typedef struct{
-  char codBar[22];
-  char nombre[80];
-  float precio;
-  int stock;
-  tFecha fechaStock;
-}tProducto;
 
 void ingresarHorario(tHora *horario);
 void compararHorario(tHora horario1, tHora horario2, tHora *resultado);
