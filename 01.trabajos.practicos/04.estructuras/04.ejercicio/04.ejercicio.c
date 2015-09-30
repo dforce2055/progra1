@@ -1,19 +1,21 @@
 /* 4. Un supermercado desea contar con un programa que le permita registrar los datos de sus
-art√≠culos. En el mismo no existen m√°s de 1000 productos distintos. Realizar un programa ABM
-utilizando la estructura indicada en el punto 1.c, en el que los datos deber√°n estar ordenados
+artÌculos. En el mismo no existen m·s de 1000 productos distintos. Realizar un programa ABM
+utilizando la estructura indicada en el punto 1.c, en el que los datos deber·n estar ordenados
 por nombre. Contemplar las siguientes funciones:
 
-altaProd: par√°metros recibidos ser√°n el vector y la cantidad cargados hasta el momento. Esta
-funci√≥n deber√° permitir cargar productos hasta que se llene el vector o hasta que ingresen un
-nombre vac√≠o en el campo nombre.
+altaProd: par·metros recibidos ser·n el vector y la cantidad cargados hasta el momento. Esta
+funciÛn deber· permitir cargar productos hasta que se llene el vector o hasta que ingresen un
+nombre vacÌo en el campo nombre.
 
-bajaProd: par√°metros recibidos ser√°n el vector y la cantidad cargados hasta el momento. Esta
-funci√≥n deber√° permitir ingresar un nombre y eliminar los datos del producto.
+bajaProd: par·metros recibidos ser·n el vector y la cantidad cargados hasta el momento. Esta
+funciÛn deber· permitir ingresar un nombre y eliminar los datos del producto.
 
-mostrarProductos: par√°metros recibidos ser√°n el vector y la cantidad cargados hasta el momento.
-Esta funci√≥n deber√° permitir mostrar los datos de todos los productos del supermercado.*/
+mostrarProductos: par·metros recibidos ser·n el vector y la cantidad cargados hasta el momento.
+Esta funciÛn deber· permitir mostrar los datos de todos los productos del supermercado.*/
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #define MAX 1000
 //linux clear | windows cls
 typedef struct{
@@ -27,16 +29,17 @@ typedef struct{
   tFecha fechaStock;
 }tProducto;
 
+void limpiarBuffer(void);
+int menu(int *opcion);
 void altaProd(tProducto productos[MAX], int *id);
 void bajaProd(tProducto productos[MAX], int *id);
-int buscarProducto(tProducto productos[MAX], char *baja, int id);
+  int buscarProducto(tProducto productos[MAX], char *baja, int id);
+  void reordenar(tProducto productos[MAX],int pos,int id);
 void mostrarProductos(tProducto productos[MAX], int id);
-void limpiarBuffer(void);
-void reordenar(tProducto productos[MAX],int pos,int id);
-int menu(int *opcion);
+
 int main(){
   tProducto productos[MAX];
-  int opcion, id;
+  int opcion, id = 0;
   while(menu(&opcion)){
     switch(opcion){
      case 1:altaProd(productos, &id); break;
@@ -46,13 +49,17 @@ int main(){
     }
   }
 
-
   return 0;
+}
+void limpiarBuffer(void){
+  //Luego de cada scanf() es necesario limpiar la cola del teclado
+  //para eliminar el salto de linea "\n"
+  while(fgetc(stdin)!='\n');
 }
 int menu(int *opcion){
   puts("Bienvenido al Super Mercado Chino:");
   puts("==================================");
-  puts("¬øQue funcion desea realizar?");
+  puts("Que funcion desea realizar?");
   puts("1.Alta de Producto");
   puts("2.Baja de Producto");
   puts("3.Mostrar Productos");
@@ -63,7 +70,7 @@ int menu(int *opcion){
 }
 void altaProd(tProducto productos[MAX], int *id){
   //Recibe por referencia un vector de estructuras tProducto y la cantidad
-  //de productos almacenados en el vector tambi√©n por referencia.
+  //de productos almacenados en el vector tambiÈn por referencia.
   //Solicita la carga a traves de teclado para c/u de los campos y los
   //guarda en la posicion del vector de estructura, hasta llegar al maximo
   //o hasta cargar un producto con nombre vacio.
@@ -74,15 +81,15 @@ void altaProd(tProducto productos[MAX], int *id){
     fgets(productos[*id].nombre, 79, stdin);
     if(productos[*id].nombre[0] == '\n'){
       vacio = 1;
-      system("clear");
+      system("cls");
       break;
     }
-    puts("Ingrese Codigo de Barra: ");
+    printf("Ingrese Codigo de Barra: ");
     fgets(productos[*id].codBar, 21, stdin);
-    puts("Ingrese Precio: ");
-    scanf("%2f", &productos[*id].precio);
+    printf("Ingrese Precio: ");
+    scanf("%f", &productos[*id].precio);
     limpiarBuffer();
-    puts("Ingrese la cantidad a stock: ");
+    printf("Ingrese la cantidad a stock: ");
     scanf("%d", &productos[*id].stock);
     limpiarBuffer();
   }
@@ -91,20 +98,52 @@ void bajaProd(tProducto productos[MAX], int *id){
   char baja[128];
   int pos = 0;
 
-  puts("Ingrese el producto a dar de baja: ");
+  printf("Ingrese el producto a dar de baja: ");
   fgets(baja,128, stdin);
+
   pos = buscarProducto(productos, baja, *id);
+  baja[strlen(baja)-1] = '\0';//elimino \n de la cadena
   if(pos != -1){
     reordenar(productos, pos, *id);
+  *id = *id - 1;
+  printf("El producto \"%s\" ha sido eliminado\n", baja);
+  }else{
+    printf("\nEl producto \"%s\" no existe\n\n", baja);
   }
+}
+  int buscarProducto(tProducto productos[MAX], char *baja, int id){
+  //Recibe por referencia un vector de estructuras tProducto y la cantidad
+  //de productos almacenados en el vector tambiÈn por referencia.
+  //Ademas recibe por referencia una cadena
+  //Busca en todas las posiciones del vector la cadena y devuelve la posicion
+  int pos = -1, i;
+
+  for(i = 0; i < id; i++){
+    if(strcmp(productos[i].nombre, baja) == 0){
+      pos = i;
+    }
+  }
+  return pos;
+}
+  void reordenar(tProducto productos[MAX],int pos,int id){
+  //Recibe por referencia un vector de estructuras tProducto y la cantidad
+  //de productos almacenados en el vector por valor.
+  //Tambien recibe por valor la posicion del vector a partir de cual se
+  //debe reordenar. Reordena copiando en vector[n] -> vector[n-1]
+  int i;
+
+  for(i = pos; i < id; i++){
+    productos[i] = productos[i+1];
+  }
+  strcpy(productos[i].codBar, "");//"" comillas dobles para string agrega el '\0'
 }
 void mostrarProductos(tProducto productos[MAX], int id){
   //Recibe por referencia un vector de estructuras tProducto y la cantidad
-  //de productos almacenados en el vector tambi√©n por referencia.
+  //de productos almacenados en el vector tambiÈn por referencia.
   //Imprime por pantalla los productos dentro del vector hasta llegar al ultimo
   int i;
   if(id > 0){
-    system("clear");
+    system("cls");
     puts("##################");
     puts("Mostrar Productos:");
     puts("##################");
@@ -119,39 +158,10 @@ void mostrarProductos(tProducto productos[MAX], int id){
     puts("Fin de productos en stock.");
     puts("##########################\n\n");
   }else{
-      system("clear");
+      system("cls");
       puts("##############################");
       puts("No existen productos en stock");
       puts("##############################\n");
     }
 }
-void limpiarBuffer(void){
-  //Luego de cada scanf() es necesario limpiar la cola del teclado
-  //para eliminar el salto de linea "\n"
-  while(fgetc(stdin)!='\n');
-}
-int buscarProducto(tProducto productos[MAX], char *baja, int id){
-  int pos = -1, i;
 
-  for(i = 0; i < id; i++){
-    if(strcmp(productos[i].nombre, baja) == 0){
-      pos = i;
-    }
-  }
-  return pos;
-}
-void reordenar(tProducto productos[MAX],int pos,int id){
-  int i;
-
-  for(i = pos; i < id; i++){
-    productos[i] = productos[i+1];
-  }
-  //productos[i] = "NULL";//Como guardar una posici√≥n nula en un vector de structuras?
-  strcpy(productos[i].codBar, "\0");
-  strcpy(productos[i].nombre, "\0");
-  productos[i].precio = 0;
-  productos[i].stock = 0;
-  productos[i].fechaStock.dia = 0;
-  productos[i].fechaStock.mes = 0;
-  productos[i].fechaStock.anio = 0;
-}
