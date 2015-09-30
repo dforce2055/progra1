@@ -11,20 +11,19 @@ fecha de actualización de stock (día, mes, año)
 #include <stdio.h>
 #include <string.h>
 typedef struct{
-  char dia, mes; //guardo en string para no hacer converción al imprimir 
-  int anio;
+  int dia, mes, anio;
 }tFecha;
 typedef struct{
   int hora, minuto, segundo;
 }tHora;
 typedef struct{
-  int codBar[22];
+  char codBar[22];
   char nombre[80];
   float precio;
   int stock;
   tFecha fechaStock;
 }tProducto;
 int main(){
-  
+
   return 0;
 }
