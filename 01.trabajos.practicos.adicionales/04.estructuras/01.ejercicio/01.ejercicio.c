@@ -18,17 +18,17 @@ tFraccion multiplicacion(tFraccion f1, tFraccion f2);
 tFraccion division(tFraccion f1, tFraccion f2);
 
 int main(){
-  tFraccion f1 = {3,5}, f2 = {4,3}, result;
+  tFraccion f1, f2, result;
   int opcion;
 
-  /*printf("Ingrese 1er fraccion.\nnumerado: ");
+  printf("Ingrese 1er fraccion.\nnumerado: ");
   scanf("%d", &f1.numerador);
   printf("denominador: ");
   scanf("%d", &f1.denominador);
   printf("Ingrese 2da fraccion.\nnumerado: ");
   scanf("%d", &f2.numerador);
   printf("denominador: ");
-  scanf("%d", &f2.denominador);*/
+  scanf("%d", &f2.denominador);
 
   while(menu(&opcion)){
     switch(opcion){
@@ -77,6 +77,8 @@ int menu(int *opcion){
   return *opcion;
 }
 tFraccion suma(tFraccion f1, tFraccion f2){
+  //Recibe por valor 2 estructuras tFraccion.
+  //Suma las fracciones y retorna el resultado en una estructura
   tFraccion result;
   if(f1.denominador == f2.denominador){
     result.numerador = f1.numerador + f2.numerador;
@@ -88,6 +90,9 @@ tFraccion suma(tFraccion f1, tFraccion f2){
   return result;
 }
 tFraccion resta(tFraccion f1, tFraccion f2){
+  //Recibe por valor 2 estructuras tFraccion.
+  //Resta las fracciones y retorna el resultado en una estructura
+  //Si la resta da como numerador un cero, retorna 0/0
   tFraccion result;
   if(f1.denominador == f2.denominador){
     result.numerador = f1.numerador - f2.numerador;
@@ -96,15 +101,20 @@ tFraccion resta(tFraccion f1, tFraccion f2){
     result.numerador = (f1.numerador * f2.denominador) - (f1.denominador * f2.numerador);
     result.denominador = f1.denominador * f2.denominador;
   }
+  if(result.numerador == 0) result.denominador = 0;//no se puede dividir por cero
   return result;
 }
 tFraccion multiplicacion(tFraccion f1, tFraccion f2){
+  //Recibe por valor 2 estructuras tFraccion.
+  //Multiplica las fracciones y retorna el resultado en una estructura
   tFraccion result;
   result.numerador = f1.numerador * f2.numerador;
   result.denominador = f1.denominador * f2.denominador;
   return result;
 }
 tFraccion division(tFraccion f1, tFraccion f2){
+  //Recibe por valor 2 estructuras tFraccion.
+  //Divide las fracciones y retorna el resultado en una estructura
   tFraccion result;
   result.numerador = f1.numerador * f2.denominador;
   result.denominador = f1.denominador * f2.numerador;
