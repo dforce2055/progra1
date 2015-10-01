@@ -8,33 +8,49 @@ y la división de números racionales. */
 #include <string.h>
 typedef struct{
   int numerador, denominador;
-}tNumRacionales;
+}tFraccion;
 
 void limpiarBuffer(void);
 int menu(int *opcion);
-int suma(tNumRacionales numeros);
-int resta(tNumRacionales numeros);
-int multiplicacion(tNumRacionales numeros);
-int division(tNumRacionales numeros);
+tFraccion suma(tFraccion f1, tFraccion f2);
+tFraccion resta(tFraccion f1, tFraccion f2);
+tFraccion multiplicacion(tFraccion f1, tFraccion f2);
+tFraccion division(tFraccion f1, tFraccion f2);
 
 int main(){
-  tNumRacionales numeros;
-  int opcion, result = 0;
+  tFraccion f1 = {3,5}, f2 = {4,3}, result;
+  int opcion;
 
-  printf("Ingrese 2 valores para operar.\n1: ");
-  scanf("%d", &numeros.numerador);
-  printf("2: ");
-  scanf("%d", &numeros.denominador);
+  /*printf("Ingrese 1er fraccion.\nnumerado: ");
+  scanf("%d", &f1.numerador);
+  printf("denominador: ");
+  scanf("%d", &f1.denominador);
+  printf("Ingrese 2da fraccion.\nnumerado: ");
+  scanf("%d", &f2.numerador);
+  printf("denominador: ");
+  scanf("%d", &f2.denominador);*/
 
   while(menu(&opcion)){
     switch(opcion){
-      case 1: printf("\nEl resultado de la suma es %d\n", result = suma(numeros)); break;
-      case 2: printf("\nEl resultado de la resta es %d\n", result = resta(numeros)); break;
-      case 3: printf("\nEl resultado de la multiplicacion es %d\n", result = multiplicacion(numeros)); break;
+      case 1:
+        result = suma(f1, f2);
+        system("clear");
+        printf("El resultado de la suma es %d/%d\n\n", result.numerador, result.denominador);
+        break;
+      case 2:
+        result = resta(f1, f2);
+        system("clear");
+        printf("El resultado de la resta es %d/%d\n\n", result.numerador, result.denominador);
+        break;
+      case 3:
+        result = multiplicacion(f1, f2);
+        system("clear");
+        printf("El resultado de la multiplicacion es %d/%d\n\n", result.numerador, result.denominador);
+        break;
       case 4:
-        result = division(numeros);
-        if(result != -1) printf("\nEl resultado de la division es %d\n", result);
-        else puts("No se puede dividor por 0!");
+        result = division(f1, f2);
+        system("clear");
+        printf("El resultado de la division es %d/%d\n\n", result.numerador, result.denominador);
         break;
       default: puts("El valor ingresado es incorrecto"); break;
     }
@@ -60,16 +76,37 @@ int menu(int *opcion){
   limpiarBuffer();
   return *opcion;
 }
-int suma(tNumRacionales numeros){
-  return numeros.numerador + numeros.denominador;
+tFraccion suma(tFraccion f1, tFraccion f2){
+  tFraccion result;
+  if(f1.denominador == f2.denominador){
+    result.numerador = f1.numerador + f2.numerador;
+    result.denominador = f1.denominador;
+  }else{
+    result.numerador = (f1.numerador * f2.denominador) + (f1.denominador * f2.numerador);
+    result.denominador = f1.denominador * f2.denominador;
+  }
+  return result;
 }
-int resta(tNumRacionales numeros){
-  return numeros.numerador - numeros.denominador;
+tFraccion resta(tFraccion f1, tFraccion f2){
+  tFraccion result;
+  if(f1.denominador == f2.denominador){
+    result.numerador = f1.numerador - f2.numerador;
+    result.denominador = f1.denominador;
+  }else{
+    result.numerador = (f1.numerador * f2.denominador) - (f1.denominador * f2.numerador);
+    result.denominador = f1.denominador * f2.denominador;
+  }
+  return result;
 }
-int multiplicacion(tNumRacionales numeros){
-  return numeros.numerador * numeros.denominador;
+tFraccion multiplicacion(tFraccion f1, tFraccion f2){
+  tFraccion result;
+  result.numerador = f1.numerador * f2.numerador;
+  result.denominador = f1.denominador * f2.denominador;
+  return result;
 }
-int division(tNumRacionales numeros){
-  if(numeros.denominador == 0) return -1;
-  else return numeros.numerador / numeros.denominador;
+tFraccion division(tFraccion f1, tFraccion f2){
+  tFraccion result;
+  result.numerador = f1.numerador * f2.denominador;
+  result.denominador = f1.denominador * f2.numerador;
+  return result;
 }
