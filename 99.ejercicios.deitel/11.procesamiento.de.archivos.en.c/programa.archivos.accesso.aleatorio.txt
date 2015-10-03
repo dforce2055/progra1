@@ -1,0 +1,5 @@
+Elabore un sistema de procesamiento de créditos capaz de almacenar hasta 100 registros de longitud fija. Cada
+registro debe consistir en un número de cuenta que se utilizará como clave de registro, un apellido, un nombre y
+un saldo. El programa resultante debe poder actualizar una cuenta, insertar un nuevo registro de cuenta, eliminar
+una cuellta y listar todos los registros de cuentas en un archivo de texto con formato para impresión. Utilice un
+archivo de acceso aleatorio.
