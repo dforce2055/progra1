@@ -87,6 +87,7 @@ int agregarAcumulado(tEnteros enteros, char *nombreArch){
   fwrite(&acumulados, sizeof(acumulados), 1, archivo2);
   //guardo una copia en archivo de texto para control
   fprintf(archivo3,"%d\n", acumulados);
+  //fwrite(&acumulados, sizeof(int), 1, archivo3);
   system("mv acumulados.dat enteros.dat");//renombro acumulados -> enteros.dat
   fclose(archivo);
   fclose(archivo2);
