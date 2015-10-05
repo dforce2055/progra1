@@ -16,16 +16,11 @@ int main(){
 
   if(grabarArch(enteros, "enteros.dat")){
     puts("Archivo guadado correctamente.");
-    puts("Datos conenidos en el archivo:");
+    puts("Datos contenidos en el archivo:");
     puts("==============================");
     mostrarArch("enteros.dat");
   }
   agregarAcumulado(enteros, "enteros.dat");
-
-
-
-
-
 
   return 0;
 }
@@ -71,7 +66,7 @@ int agregarAcumulado(tEnteros enteros, char *nombreArch){
   archivo2 = fopen("acumulados.dat", "wb");
   archivo3 = fopen("acumulados.txt", "at");
 
-  if(archivo == NULL){
+  if(archivo == NULL || archivo2 == NULL || archivo3 == NULL){
     puts("Error al intentar guardar el archivo");
     return 0;
   }
