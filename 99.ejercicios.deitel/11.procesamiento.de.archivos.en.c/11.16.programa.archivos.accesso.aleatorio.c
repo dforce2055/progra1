@@ -13,6 +13,7 @@ int nuevoRegistro(FILE *archivo);
 int actualizarCuenta(FILE *archivo);
 int actualizarSaldo(FILE *archivo);
 int borrarRegistro(FILE *archivo);
+int mostrarRegistrosPorPantalla(FILE *archivo);
 int guardarArchivoTexto(FILE *archivo);
 
 int main(){
@@ -43,7 +44,10 @@ int main(){
                 puts("Registro eliminado correctamente.");
               }else puts("### 0 registros fueron borrados ###");
               break;
-      case 5: if(guardarArchivoTexto(archivo)){
+      case 5: if(mostrarRegistrosPorPantalla(archivo));
+              else puts("### 0 registros fueron mostrads ###");
+              break;
+      case 6: if(guardarArchivoTexto(archivo)){
                 puts("Archivo de texto generado exitosamente.");
               }else puts("### 0 registros fueron guardados ###");
               break;
@@ -66,7 +70,8 @@ int menu(int *opcion){
   puts("2.Actualizar datos de una cuenta");
   puts("3.Actualizar saldo en cuenta");
   puts("4.Borrar cuenta");
-  puts("5.Almacenar en un archivo de texto con formato, las cuentas");
+  puts("5.Mostrar registros por pantalla");
+  puts("6.Almacenar en un archivo de texto con formato, las cuentas");
   puts("0.Salir");
   scanf("%d", opcion);
   limpiarBuffer();
@@ -174,6 +179,25 @@ int borrarRegistro(FILE *archivo){
 
   return 1;
 }
+int mostrarRegistrosPorPantalla(FILE *archivo){
+  tCliente cliente;
+  int i = 0;
+
+  rewind(archivo);
+  fread(&cliente, sizeof(cliente), 1, archivo);
+  puts("Registros en el archivo:");
+  puts("========================");
+  printf("%-6s%-16s%-11s%-10s\n", "Cta", "Apellido", "Nombre", "Saldo");
+  while(!feof(archivo)){
+    if(cliente.numCta != 0){
+      printf("%-6d%-16s%-11s$%-10.2f\n", cliente.numCta, cliente.apellido, cliente.nombre, cliente.saldo);
+      i++;
+    }
+    fread(&cliente, sizeof(cliente), 1, archivo);
+  }
+  if(0 == i) return 0;
+  else return 1;
+}
 int guardarArchivoTexto(FILE *archivo){
   FILE *archTexto;
   tCliente cliente;
@@ -189,7 +213,7 @@ int guardarArchivoTexto(FILE *archivo){
   while(!feof(archivo)){
     if(cliente.numCta != 0){
       i++;
-      fprintf(archTexto,"%-6d%-16s%-11s%10.2lf\n", cliente.numCta, cliente.apellido, cliente.nombre, cliente.saldo);
+      fprintf(archTexto,"%-6d%-16s%-11s$%10.2lf\n", cliente.numCta, cliente.apellido, cliente.nombre, cliente.saldo);
     }
     fread(&cliente, sizeof(cliente), 1, archivo);
   }

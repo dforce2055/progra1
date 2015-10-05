@@ -1,4 +1,5 @@
 Cta   Apellido        Nombre          Saldo
-1     Perez           Diego        22500.99
-33    Nieva           Gabriel      19999.01
-100   Muniz           Dario        15801.32
+1     Perez           Diego      $  22500.99
+33    Nieva           Gabriel    $  19999.01
+71    Gomez           Federico   $  33599.01
+100   Muniz           Dario      $  15801.32
