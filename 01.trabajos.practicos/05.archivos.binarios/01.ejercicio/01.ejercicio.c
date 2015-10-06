@@ -9,8 +9,9 @@ typedef struct{
 int grabarArch(tEnteros enteros, char *nombreArch);
 int mostrarArch(char *nombreArch);
 int agregarAcumulado(tEnteros enteros, char *nombreArch);
+int ordenarArch(char *nombreArch);
 int main(){
-  tEnteros enteros = {0,1,2,3,4,5,6,7,8,9};
+  tEnteros enteros = {9,3,2,4,-1,5,0,0,7,6};
 
 
 
@@ -18,6 +19,9 @@ int main(){
     puts("Archivo guadado correctamente.");
     puts("Datos contenidos en el archivo:");
     puts("==============================");
+    //mostrarArch("enteros.dat");
+    puts("Ordenado:");
+    ordenarArch("enteros.dat");
     mostrarArch("enteros.dat");
   }
   agregarAcumulado(enteros, "enteros.dat");
@@ -87,5 +91,28 @@ int agregarAcumulado(tEnteros enteros, char *nombreArch){
   fclose(archivo);
   fclose(archivo2);
   fclose(archivo3);
+  return 1;
+}
+int ordenarArch(char *nombreArch){
+  FILE *archivo;
+  int reg1, reg2, j, i, cantReg = 0;
+
+  if((archivo = fopen(nombreArch, "rb+")) == NULL)
+    puts("Error al ordenar archivo");
+    return 0;
+  rewind(archivo);
+  fseek(archivo, 0, SEEK_END);
+  cantReg = ftell(archivo) / sizeof(int);
+  for(i = 0; i < cantReg; i++){
+    for(j = i +1; j < cantReg -1; j++){
+      fread(&reg1, sizeof(int) * i, 1, archivo);
+      fread(&reg2, sizeof(int) * j, 1, archivo);
+      if(reg1 > reg2){
+        fseek(archivo, sizeof(int) * i, SEEK_SET);
+        fwrite(&reg1, sizeof(int), 1, archivo);
+        fwrite(&reg2, sizeof(int), 1, archivo);
+      }
+    }
+  }
   return 1;
 }
