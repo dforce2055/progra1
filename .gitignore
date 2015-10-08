@@ -3,7 +3,7 @@
 /00_LIBROS/
 /00_TRABAJOS_PRACTICOS/
 
-#No incluir archivos abiertos
+#No incluir archivos abiertos ni objetos
 *~
 *.o
 *.~lock*
