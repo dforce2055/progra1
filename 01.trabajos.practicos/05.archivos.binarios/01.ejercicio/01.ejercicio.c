@@ -9,8 +9,10 @@ void grabarArch(FILE *archivo, int entero);
 void mostrarArch(FILE *archivo);
 void agregarAcumulado(FILE *archivo);
 void ordenarArch(FILE *archivo);
-//int agregarAcumulado(tEnteros enteros, char *nombreArch, int numReg);
-//int ordenarArch(char *nombreArch);
+  int leerRegistro(FILE *archivo, int numReg);
+  void grabarRegistro(FILE *archivo, int numReg, int valor);
+int buscarArch(FILE *archivo, int buscado);
+
 int main(){
   FILE *archivo;
   int i = 0;
@@ -18,19 +20,22 @@ int main(){
   //int enteros = {9,3,2,4,-1,5,0,0,7,6};
 
   if((archivo = fopen("enteros.dat","wb+")) == NULL){
-	puts("Error al intentar abrir el archivo 'enteros.dat'.");
-	return 1;
+  puts("Error al intentar abrir el archivo 'enteros.dat'.");
+  return 1;
   }
-  
+
   for(i = 0; i < 8; i++)
-	  grabarArch(archivo, rand()%9);
+    grabarArch(archivo, rand()%9);
 
   mostrarArch(archivo);
-  agregarAcumulado(archivo);
-  ordenarArch(archivo);
-  puts("archivo ordenado");
-  mostrarArch(archivo);
-  
+  //agregarAcumulado(archivo);
+  //ordenarArch(archivo);
+  //puts("archivo ordenado");
+  //mostrarArch(archivo);
+
+  puts("Nº buscado '4'");
+  buscarArch(archivo, 4);
+
   fclose(archivo);
   return 0;
 }
@@ -45,10 +50,10 @@ void mostrarArch(FILE *archivo){
   fread(&enteros, sizeof(int), 1, archivo);
   while(!feof(archivo)){
     i++;
-	printf("%d\t", enteros);
+  printf("%d\t", enteros);
     fread(&enteros, sizeof(enteros), 1, archivo);
-	if(0 == i % 8)
-		printf("\n");
+  if(0 == i % 8)
+    printf("\n");
   }
 }
 void agregarAcumulado(FILE *archivo){
@@ -60,28 +65,48 @@ void agregarAcumulado(FILE *archivo){
   fread(&enteros, sizeof(int), 1, archivo);
   while(!feof(archivo)){
     acum = acum + enteros;
-	fread(&enteros, sizeof(enteros), 1, archivo);
+  fread(&enteros, sizeof(enteros), 1, archivo);
   }
-  fseek(archivo, 0, SEEK_CUR);//necesario para el cambio de actividad de lectura a escritura, no mueve el indicador de reg. activo
-  fwrite(&enteros, sizeof(enteros), 1, archivo);
+  //fseek(archivo, 0, SEEK_SET);//necesario para el cambio de actividad de lectura a escritura, no mueve el indicador de reg. activo
+  fwrite(&acum, sizeof(enteros), 1, archivo);
   printf("\nEl acumulado es %d\n", acum);
 }
 void ordenarArch(FILE *archivo){
   int i, j, entero1, entero2, cantReg = 0;
-  
+
   fseek(archivo,0, SEEK_END);
   cantReg = ftell(archivo) / sizeof(int);
-  rewind(archivo);
-  
+
   for(i = 0; i < cantReg - 1; i++){
-	  for(j = i +1; j < cantReg; j++){
-		fread(&entero1,sizeof(int),1,archivo);
-		fread(&entero2,sizeof(int),1,archivo);
-		if(entero1 > entero2){
-			fseek(archivo,-2 * (int)sizeof(int), SEEK_CUR);//CAST de el valor devuelto por sizeof()
-			fwrite(&entero2, sizeof(int), 1, archivo);
-			fwrite(&entero1, sizeof(int), 1, archivo);
-		}
-	  }
+    for(j = i +1; j < cantReg; j++){
+      entero1 = leerRegistro(archivo, i);
+      entero2 = leerRegistro(archivo, j);
+      if(entero1 > entero2){
+        grabarRegistro(archivo, i, entero2);
+        grabarRegistro(archivo, j, entero1);
+      }
+    }
   }
+}
+int leerRegistro(FILE *archivo, int numReg){
+  int dato;
+  fseek(archivo, numReg * sizeof(int), SEEK_SET);
+  fread(&dato, sizeof(int), 1, archivo);
+  return dato;
+}
+void grabarRegistro(FILE *archivo, int numReg, int valor){
+  fseek(archivo, numReg * sizeof(int), SEEK_SET);
+  fwrite(&valor, sizeof(int), 1, archivo);
+}
+int buscarArch(FILE *archivo, int buscado){
+  int result = -1, aux = 0;
+  rewind(archivo);
+  fread(&aux, sizeof(int), 1, archivo);
+  while(!feof(archivo)){
+    if(aux == buscado)
+      puts("NUMERO ENCONTRADO");
+      fread(&aux, sizeof(int), 1, archivo);
+
+  }
+  return result;
 }
