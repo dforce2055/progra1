@@ -15,8 +15,8 @@ int buscarArch(FILE *archivo, int buscado);
 
 int main(){
   FILE *archivo;
-  int i = 0;
-  srand((int)time(NULL));
+  int i = 0, pos = -1;
+  srand((int)time(NULL));//numeros aleatorios
   //int enteros = {9,3,2,4,-1,5,0,0,7,6};
 
   if((archivo = fopen("enteros.dat","wb+")) == NULL){
@@ -24,17 +24,24 @@ int main(){
   return 1;
   }
 
-  for(i = 0; i < 8; i++)
-    grabarArch(archivo, rand()%9);
+  /*for(i = 0; i < 8; i++)
+    grabarArch(archivo, rand()%9);*/
+  grabarArch(archivo, 1);
+  grabarArch(archivo, 2);
+  grabarArch(archivo, 3);
+  grabarArch(archivo, 4);
+  grabarArch(archivo, 5);
 
   mostrarArch(archivo);
   //agregarAcumulado(archivo);
-  //ordenarArch(archivo);
-  //puts("archivo ordenado");
-  //mostrarArch(archivo);
+  ordenarArch(archivo);
+  puts("archivo ordenado");
+  mostrarArch(archivo);
 
-  puts("Nº buscado '4'");
-  buscarArch(archivo, 4);
+  pos = buscarArch(archivo, 4);
+  puts("\nNº buscado '4'");
+  if(pos != -1) printf("### Encontrado en la posicion: %d###\n", pos);
+  else puts("No se encontro el numero.");
 
   fclose(archivo);
   return 0;
@@ -99,14 +106,27 @@ void grabarRegistro(FILE *archivo, int numReg, int valor){
   fwrite(&valor, sizeof(int), 1, archivo);
 }
 int buscarArch(FILE *archivo, int buscado){
-  int result = -1, aux = 0;
-  rewind(archivo);
-  fread(&aux, sizeof(int), 1, archivo);
-  while(!feof(archivo)){
-    if(aux == buscado)
-      puts("NUMERO ENCONTRADO");
-      fread(&aux, sizeof(int), 1, archivo);
+  //Búsqueda binaria, mejora notable mente el rendimiento
+  //Requisito, archivo con registros ordenados
+  //De encontrar a buscado retorna la posición
+  //Sino retorna -1
+  int inf = 0, sup = 0, centro = 0, cantReg = 0, contCentro = 0;
 
+  fseek(archivo, 0, SEEK_END);
+  cantReg = ftell(archivo) / sizeof(int);
+  rewind(archivo);
+
+  sup = cantReg - 1;
+
+  printf("CantReg: %d", cantReg);
+  while(inf <= sup){
+    centro = ((inf + sup) / 2) * 1.5; //
+    contCentro = leerRegistro(archivo, centro);//guardo el valor del centro para comparar con buscado
+    printf("\ncentro:%d", centro);
+    printf("\tcontCentro:%d", contCentro);
+    if(contCentro == buscado)                                  return centro;
+    else if(contCentro < buscado)                              inf = centro -1;
+    else                                                       sup = centro +1;
   }
-  return result;
+  return -1;
 }
