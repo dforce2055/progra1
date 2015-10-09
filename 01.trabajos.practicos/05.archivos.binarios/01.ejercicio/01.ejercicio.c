@@ -12,6 +12,7 @@ void ordenarArch(FILE *archivo);
   int leerRegistro(FILE *archivo, int numReg);
   void grabarRegistro(FILE *archivo, int numReg, int valor);
 int buscarArch(FILE *archivo, int buscado);
+int eliminarValor(FILE *archivo, int valor);
 
 int main(){
   FILE *archivo;
@@ -24,24 +25,23 @@ int main(){
   return 1;
   }
 
-  /*for(i = 0; i < 8; i++)
-    grabarArch(archivo, rand()%9);*/
-  grabarArch(archivo, 1);
-  grabarArch(archivo, 2);
-  grabarArch(archivo, 3);
-  grabarArch(archivo, 4);
-  grabarArch(archivo, 5);
+  for(i = 0; i < 8; i++)
+    grabarArch(archivo, rand()%9);
 
   mostrarArch(archivo);
-  //agregarAcumulado(archivo);
+  agregarAcumulado(archivo);
   ordenarArch(archivo);
   puts("archivo ordenado");
   mostrarArch(archivo);
 
   pos = buscarArch(archivo, 4);
   puts("\nNº buscado '4'");
-  if(pos != -1) printf("### Encontrado en la posicion: %d###\n", pos);
-  else puts("No se encontro el numero.");
+  if(pos != -1){
+    printf("### Encontrado en la posicion: %d###\n", pos);
+    eliminarValor(archivo, 4);
+    puts("Numero borrado logicamente.");
+    mostrarArch(archivo);
+  }else puts("No se encontro el numero.");
 
   fclose(archivo);
   return 0;
@@ -57,7 +57,8 @@ void mostrarArch(FILE *archivo){
   fread(&enteros, sizeof(int), 1, archivo);
   while(!feof(archivo)){
     i++;
-  printf("%d\t", enteros);
+    if(enteros < 0) printf("(%d)\t", enteros);
+    else printf("%d\t", enteros);
     fread(&enteros, sizeof(enteros), 1, archivo);
   if(0 == i % 8)
     printf("\n");
@@ -117,16 +118,22 @@ int buscarArch(FILE *archivo, int buscado){
   rewind(archivo);
 
   sup = cantReg - 1;
-
-  printf("CantReg: %d", cantReg);
   while(inf <= sup){
-    centro = ((inf + sup) / 2) * 1.5; //
+    centro = ((inf + sup) / 2);//defino centro
     contCentro = leerRegistro(archivo, centro);//guardo el valor del centro para comparar con buscado
-    printf("\ncentro:%d", centro);
-    printf("\tcontCentro:%d", contCentro);
     if(contCentro == buscado)                                  return centro;
-    else if(contCentro < buscado)                              inf = centro -1;
-    else                                                       sup = centro +1;
+    else if(contCentro < buscado)                              inf = centro +1;
+    else                                                       sup = centro -1;
   }
   return -1;
+}
+
+int eliminarValor(FILE *archivo, int valor){
+  int encontrado = 0, reg;
+  encontrado = buscarArch(archivo, valor);
+  if(encontrado != 0){
+    reg = leerRegistro(archivo, encontrado);
+    reg = reg * -1;
+    grabarRegistro(archivo, encontrado, reg);
+  }
 }
