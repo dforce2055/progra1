@@ -1,0 +1,30 @@
+2. Un laboratorio de especialidades medicinales posee un archivo en disco cuyos 
+registros contienen los siguientes campos:
+
+Lote: 5 caracteres
+Código de barras: 21 caracteres
+Nombre: 40 caracteres
+Costo: número real
+Stock: Número entero: Cantidad de envases almacenados
+Mes, Año: Enteros: Mes y año de vencimiento de la medicación
+
+El archivo contiene un registro por cada lote, es decir que pueden existir 
+varios registros para un mismo medicamento si éstos pertenecen a lotes 
+distintos. Se solicita desarrollar uno o más programas para:
+
+Crear el archivo, ingresando los datos por teclado.
+Borrar del archivo los registros de aquellos lotes que se encuentren vencidos, 
+comparando la fecha de vencimiento de cada uno con una fecha testigo que se 
+ingresa por teclado. Para borrar los registros es necesario generar un nuevo 
+archivo que contenga solamente los lotes no vencidos, emitiendo además un 
+listado por pantalla con los registros eliminados.
+Generar e imprimir un listado con el código, el nombre y la cantidad de 
+unidades en stock para cada medicamento, sin importar el lote al que pertenezca.
+El archivo no está ordenado, y los medicamentos son a lo sumo 130. 
+
+Ejemplo:
+
+CODIGO      NOMBRE              CANTIDAD EN STOCK
+10000		TERRAMICINA			xxxx
+10001		CARBOPLAT			yyyy
+  .....		............		....
