@@ -1,5 +1,5 @@
 Miercoles 06 de Octubre de 2015
-Temas: Archivos. Generalidades. Archivos binarios de acceso secuencial.
+Temas: Archivos de acceso directo. Ordenamiento de archivos.
 
 Archivos Binarios de Acceso Directo:
 ====================================
