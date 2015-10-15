@@ -1,0 +1,24 @@
+//esto es un comentario de una sola linea
+/*Comentario 
+	e 
+varias 
+lineas
+
+*/
+La Universidad invita a colaboradores, docentes, alumnos, graduados, //comentario
+familiares y amigos a participar de una nueva edición de la Campaña,12/12/1986 realizada en forma conjunta con el Hospital de Pediatría Dr. Juan P. Garrahan y el Registro Nacional de Médula Ósea (RMNO) del INCUCAI. También contará con la colaboración del Equipo de Voluntarios UADE.
+
+
+/* 1
+
+1
+
+11111 */
+asdasdasd
+asdasd
+as
+dasd
+asdasd
+
+lalala
+lalala
