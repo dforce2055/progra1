@@ -1,0 +1,11 @@
+5. Utilizar el Block de notas o cualquier otro editor para crear un archivo de texto que contenga los datos de una matriz  “rala” (matriz con más del 75 % de sus celdas sin valor definido) con el siguiente formato: (fila;columna;valor). Luego escribir una función cargarMatriz() que permita leer el archivo mencionado y cargarlo en una matriz de M x N enteros, teniendo en cuenta que no todas las posiciones tienen un valor asociado.
+Ejemplo:
+Se tiene un archivo con una matriz de 3x3 con los siguientes datos:
+(0;0;5)
+(1;1;8)
+(2;0;66)
+
+La matriz deberá quedar cargada con los siguientes valores.
+  5   0   0 
+  0   8   0
+ 66   0   0
