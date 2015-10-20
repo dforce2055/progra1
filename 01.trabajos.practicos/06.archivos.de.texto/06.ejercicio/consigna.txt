@@ -1,0 +1,9 @@
+6. Hacer un programa que invoque y pruebe las siguientes funciones:
+grabarPrecios() permite grabar en un archivo de texto el rango de precio sugerido de un producto. Cada dato se debe grabar en línea distinta.
+descripción
+precioDesde
+precioHasta 
+grabarPromedios() permite leer el archivo generado en la función anterior y generar otro archivo de texto con los promedios de los precios de los productos. Tanto la descripción como el promedio se graban en diferentes líneas.
+descripción
+promedio
+mostrarMejores() permite mostrar los productos cuyo precio promedio es superior al precio promedio de todos los productos. 
