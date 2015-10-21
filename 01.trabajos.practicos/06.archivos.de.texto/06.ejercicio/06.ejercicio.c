@@ -85,7 +85,7 @@ int grabarPromedios(char *precios){
 }
 tProducto leerProducto(FILE *in){
   //Recibe un puntero a FILE
-  //Lee y guarda en una estructura axuliar el producto
+  //Lee de *in y guarda en una estructura axuliar el producto
   //Retorna la estructura auxiliar tProducto
   tProducto producto;
   char cadena[256];
@@ -104,7 +104,7 @@ tProducto leerProducto(FILE *in){
 }
 void grabarPoducto(FILE *out, tProducto producto){
   //Recibe puntero a FILE y 1 producto
-  //Lo guarda en archivo de texto FILE*
+  //Lo guarda en archivo de texto FILE *out
   fputs(producto.descripcion,out);
   fprintf(out, "\n%.2f\n", producto.promedio);
 }
