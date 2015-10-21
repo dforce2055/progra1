@@ -10,8 +10,11 @@ typedef struct{
 
 int grabarPrecios(tProducto *producto);
 int grabarPromedios(char *precios);
-void grabarPoducto(FILE *out, tProducto producto);
-tProducto leerProducto(FILE *in);
+  void grabarPoducto(FILE *out, tProducto producto);
+  tProducto leerProducto(FILE *in);
+  tProducto leerPromedio(FILE *in);
+int mostrarMejores(char *promedios);
+
 
 int main(){
   tProducto productos[SIZE] = {0};
@@ -28,8 +31,14 @@ int main(){
   productos[2].precioDesde = 0.99;
   productos[2].precioHasta = 1.99;
 
+  strcpy(productos[3].descripcion, "Busca Polo");
+  productos[3].precioDesde = 16.99;
+  productos[3].precioHasta = 22.00;
+
   grabarPrecios(productos);
   grabarPromedios("precios.txt");
+  mostrarMejores("promedios.txt");
+
   return 0;
 }
 int grabarPrecios(tProducto *producto){
@@ -107,4 +116,60 @@ void grabarPoducto(FILE *out, tProducto producto){
   //Lo guarda en archivo de texto FILE *out
   fputs(producto.descripcion,out);
   fprintf(out, "\n%.2f\n", producto.promedio);
+}
+int mostrarMejores(char *promedios){
+  FILE *in;
+  tProducto producto;
+  int cant = 0;
+  float promedio = 0;
+
+  if((in = fopen(promedios,"rt")) == NULL){
+    printf("El archivo %s no pudo ser leido", promedios);
+    return 0;
+  }
+
+  //cantidad re registros
+  producto = leerPromedio(in);
+  while(!feof(in)){
+    cant++;
+    producto = leerPromedio(in);
+  }
+
+  rewind(in);
+  //promedio de promedios
+  producto = leerPromedio(in);
+  while(!feof(in)){
+    promedio = promedio + producto.promedio;
+    producto = leerPromedio(in);
+  }
+  promedio = promedio / cant;
+  printf("El promedio es de $%.2f\n", promedio);
+  puts("Los productos que superan el promedio son:");
+
+  rewind(in);
+  //mostrar productos que superen el promedio
+  producto = leerPromedio(in);
+  while(!feof(in)){
+    if(producto.promedio > promedio){
+      printf("%s $%.2f\n", producto.descripcion, producto.promedio);
+    }
+    producto = leerPromedio(in);
+  }
+
+}
+tProducto leerPromedio(FILE *in){
+  //Recibe un puntero a FILE promedios.txt
+  //Lee de *in y guarda en una estructura auxiliar el producto(descripción y promedio)
+  //Retorna la estructura auxiliar tProducto
+  tProducto producto;
+  char cadena[256];
+
+  fgets(cadena, 256, in);
+  strcpy(producto.descripcion, cadena);
+  producto.descripcion[strlen(producto.descripcion)-1] = '\0';
+
+  fgets(cadena, 256, in);
+  sscanf(cadena, "%f", &producto.promedio);
+
+  return producto;
 }
