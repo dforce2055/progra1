@@ -1,0 +1,10 @@
+7. Hacer un programa que permita ingresar una lista de apellidos y nombres en 
+formato "Apellido, Nombre" y guarde en el archivo ARMENIA.TXT, los nombres de 
+aquellas personas cuyo apellido termina con la cadena "IAN", en el archivo 
+ITALIA.TXT los terminados en "INI" y en el archivo ESPAÑA.TXT los terminados 
+en “EZ”. Descartar el resto. Ejemplo: 
+
+Arslanian, Gustavo  "IAN"  -->   ARMENIA.TXT
+Rossini, Giuseppe   "INI"  -->   ITALIA.TXT
+Pérez, Juan         "EZ"   -->   ESPAÑA.TXT  
+Smith, John                -->   descartar
