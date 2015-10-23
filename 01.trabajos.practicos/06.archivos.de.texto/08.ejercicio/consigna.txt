@@ -1,0 +1,25 @@
+8. Se dispone de un archivo de texto con los datos de las partidas de 196 
+aviones de Aeroparque con el siguiente formato:  
+
+01-04 número de vuelo
+06-25 días de la semana de salida (se indica con “No” si ese día el avión no 
+      parte del aeropuerto)
+27-49 ciudad de destino
+51-52 hora de partida
+54-55 minuto de partida
+57-58 hora de llegada
+60-61 minuto de llegada
+63-   empresa de aviación
+
+Hacer una función permita informar todos los vuelos que salgan lunes, martes o 
+sábado a un determinado destino y su horario de salida sea posterior a las 
+15:30. 
+Dicho destino deberá ingresarse desde teclado (el ingreso de este puede ser 
+total o parcial).
+
+La pantalla deberá mostrar los siguientes datos:
+número de avión destino
+hora de partida - expresada como hh:mm - 
+duración estimada de vuelo - expresada como hh:mm -
+aerolínea.
+Se sabe que existen aviones que parten un día y arriban al día siguiente.
