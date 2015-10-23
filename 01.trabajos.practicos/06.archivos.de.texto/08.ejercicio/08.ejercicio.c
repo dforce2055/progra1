@@ -17,6 +17,7 @@ tVuelo cpyVuelo(char *linea);
 int cpyCad(char *destino, char *salida, int desde, int hasta);
 void eliminarEspacios(char *cadena);
 void mostrarVuelo(tVuelo vuelo, char *destino);
+void calcTiempoVuelo(char *duracion, int hPartida, int mPartida, int hLLegada, int mLLegada);
 
 int main(){
   FILE *in;
@@ -30,12 +31,12 @@ int main(){
   }
 
   fgets(linea, 256, in);
-  vuelo = cpyVuelo(linea);
+  while(!feof(in)){
+    vuelo = cpyVuelo(linea);
+    mostrarVuelo(vuelo, "Montevideo(URUGUAY)");//desarrollar funcion para controlar destino.
+    fgets(linea, 256, in);
+  }
 
-  //puts("Ingrese Destino: ");
-  //fgets(destino, 79, stdin);
-  //destino[strlen(destino)-1] = '\0';
-  mostrarVuelo(vuelo, "Cordoba");
 
   fclose(in);
   return 0;
@@ -66,20 +67,13 @@ tVuelo cpyVuelo(char *linea){
 
   error =   cpyCad(vuelo.numVuelo,linea,0,4);
   eliminarEspacios(vuelo.numVuelo);
-  error =   cpyCad(vuelo.dias[0],linea,5,7);  //lun.
-  eliminarEspacios(vuelo.dias[0]);
-  error =   cpyCad(vuelo.dias[1],linea,8,10); //Mar.
-  eliminarEspacios(vuelo.dias[1]);
-  error =   cpyCad(vuelo.dias[2],linea,11,13);//Mie.
-  eliminarEspacios(vuelo.dias[2]);
-  error =   cpyCad(vuelo.dias[3],linea,14,16);//Jue.
-  eliminarEspacios(vuelo.dias[3]);
-  error =   cpyCad(vuelo.dias[4],linea,17,19);//Vie.
-  eliminarEspacios(vuelo.dias[4]);
-  error =   cpyCad(vuelo.dias[5],linea,20,22);//Sab.
-  eliminarEspacios(vuelo.dias[5]);
-  error =   cpyCad(vuelo.dias[6],linea,23,25);//Dom.
-  eliminarEspacios(vuelo.dias[6]);
+  error =   cpyCad(vuelo.dias[0],linea,5,7);  //lu
+  error =   cpyCad(vuelo.dias[1],linea,8,10); //Ma
+  error =   cpyCad(vuelo.dias[2],linea,11,13);//Mi
+  error =   cpyCad(vuelo.dias[3],linea,14,16);//Ju
+  error =   cpyCad(vuelo.dias[4],linea,17,19);//Vi
+  error =   cpyCad(vuelo.dias[5],linea,20,22);//Sa
+  error =   cpyCad(vuelo.dias[6],linea,23,25);//Do
   error =   cpyCad(vuelo.ciudadDestino,linea,26,48);
   eliminarEspacios(vuelo.ciudadDestino);
   error =   cpyCad(vuelo.hPartida,linea,50,52);
@@ -91,7 +85,7 @@ tVuelo cpyVuelo(char *linea){
   error =   cpyCad(vuelo.mLLegada,linea,59,61);
   eliminarEspacios(vuelo.mLLegada);
   error =   cpyCad(vuelo.empresa,linea,62,88);
-  eliminarEspacios(vuelo.empresa);
+  vuelo.empresa[strlen(vuelo.empresa)-1] = '\0';//Eliminar salto de línea
 
   if(error = 0){
     puts("Hubo un error al cargar el vuelo");
@@ -99,8 +93,49 @@ tVuelo cpyVuelo(char *linea){
   }else return vuelo;
 }
 void mostrarVuelo(tVuelo vuelo, char *destino){
+  int hPartida, mPartida, hLLegada, mLLegada;
+  char duracion[10] = {0};
+
+  sscanf(vuelo.hPartida, "%d", &hPartida);
+  sscanf(vuelo.mPartida, "%d", &mPartida);
+  sscanf(vuelo.hLLegada, "%d", &hLLegada);
+  sscanf(vuelo.mLLegada, "%d", &mLLegada);
 
   if(strcmp(vuelo.ciudadDestino,destino) == 0){
-    puts(vuelo.empresa);
+    if(strcmp(vuelo.dias[0],"Lu") == 0 || strcmp(vuelo.dias[1],"Ma") == 0 || strcmp(vuelo.dias[5],"Sa") == 0){
+      if(hPartida >= 15){
+        if(mPartida >= 30){
+          printf("%s - %s\n", vuelo.numVuelo, vuelo.ciudadDestino);
+          printf("%s:%s\n", vuelo.hPartida, vuelo.mPartida);
+          calcTiempoVuelo(duracion, hPartida, mPartida, hLLegada, mLLegada);
+          printf("Duración estimada de vuelo: %s hs.\n", duracion);
+          puts(vuelo.empresa);
+          puts("================================================");
+        }
+      }
+    }
+
   }
+}
+void calcTiempoVuelo(char *duracion, int hPartida, int mPartida, int hLLegada, int mLLegada){
+  int i, horas = 0, minutos = 0;
+  long int segPartida, segLLegada, segundos = 0;
+
+  segPartida = (hPartida * 3600) + (mPartida * 60);
+  segLLegada = (hLLegada * 3600) + (mLLegada * 60);
+  segundos = segLLegada - segPartida;
+
+  while(segundos >= 3600){
+    horas++;
+    segundos -= 3600;
+  }
+  while(segundos >= 60){
+    minutos++;
+    segundos -= 60;
+  }
+  if(horas < 9){
+    if(minutos < 9){
+      sprintf(duracion,"0%d:0%d", horas, minutos);
+    }else sprintf(duracion,"0%d:%d", horas, minutos);
+  }else sprintf(duracion,"%d:%d", horas, minutos);
 }
