@@ -1,0 +1,14 @@
+/* Un banco dispone de un archivo de saldos con la siguiente estructura:
+ struct ssaldo {
+ int numerocliente;
+ int saldo;
+ int limitedecredito;
+ };
+Debido a una crisis financiera se ha decidido reducir al 50% el limite de crédito autorizado
+para los clientes, por lo que tal vez algunos de ellos se excederán del nuevo máximo
+establecido. Se solicita escribir un programa que actualice el archivo de saldos con los
+nuevos límites de crédito permitidos, y que informe en un listado por pantalla los números de
+cliente que se encuentren excedidos de acuerdo a los nuevos límites. Tener en cuenta que
+los clientes que tienen deuda con el banco son solamente aquellos con saldo negativo.
+Nota: Crear primero un archivo con la estructura indicada y generar los registros con datos
+obtenidos al azar. */
