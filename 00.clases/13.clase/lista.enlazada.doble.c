@@ -1,4 +1,4 @@
-//d alfinal de cada structura para identificar que se trata de una lista
+//D alfinal de cada structura para identificar que se trata de una lista
 //doblomente enlazada
 #include <stdio.h>
 #include <stdlib.h>
