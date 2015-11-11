@@ -1,4 +1,4 @@
-Miercoles 11 de Noviembre de 2015
+Miercoles 04 de Noviembre de 2015
 Temas: Asignación dinámica de memoria. Listas enlazadas simples.
 
           ->  Estaticas
