@@ -1,6 +1,7 @@
 #3.4.071.programacion.1
 =======================
-Repositorio de practica con resolución de los trabajos practicos y ejercicios tipo parcial.
+*Lenguaje de Programación C* <br/>
+Repositorio de practica con resolución de los trabajos practicos y ejercicios tipo parcial.<br/>
 
 Carpetas<br/>
 -----
