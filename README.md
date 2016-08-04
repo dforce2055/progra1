@@ -9,10 +9,10 @@ Temas<br/>
 01.trabajos.practicos.adicionales[practica]<br/>
 02.parciales[ejercicios tipo parcial]<br/>
 
-  +00.funciones
-  +01.vectores
-  +02.matrices
-  +03.cadenas
-  +04.estructuras
-  +05.archivos.binarios
-  +06.archivos.de.texto
+  *00.funciones
+  *01.vectores
+  *02.matrices
+  *03.cadenas
+  *04.estructuras
+  *05.archivos.binarios
+  *06.archivos.de.texto
