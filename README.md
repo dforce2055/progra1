@@ -6,7 +6,7 @@ Temas<br/>
 01.trabajos.practicos[practica]<br/>
 01.trabajos.practicos.adicionales[practica]<br/>
 02.parciales[ejercicios tipo parcial]<br/>
-<p>
+<p style="padding-left:20px;">
   00.funciones<br/>
   01.vectores<br/>
   02.matrices<br/>
