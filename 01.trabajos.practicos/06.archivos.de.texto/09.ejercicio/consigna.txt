@@ -1,0 +1,29 @@
+9. Se dispone de tres formatos diferentes de archivos de texto donde se almacenan datos de empleados. Los formatos se indican al pié.
+Hacer un programa en 'C', para cada uno de los formatos de archivos suministrados, que  permitan leer uno de los archivos y grabar los datos obtenidos en un archivo binario con la siguiente estructura:
+
+#define   N    16
+#define   M    32
+typedef struct {
+               char      nombre    [N];
+               char      domicilio [M];
+               int       dd,mm, aa;      /* fecha de emisión del cheque*/
+               int       plazoValidez; 
+}Cheque;
+
+Nota: 
+si la longitud del dato informado en el archivo de texto es mayor al especificado en la estructura, este dato deberá guardarse truncado.
+Los espacios de los valores de texto que se encuentren al final de la cadena deberán ser eliminados.
+Archivo 1: Todos los campos de este archivo son de longitud fija.
+========================================================================================================================================
+         1         2         3         4         5         6
+123456789012345678901234567890123456789012345678901234567890123
+========================================================================================================================================
+Pérez Juan       2008021130 Corrientes 348                   
+González Ana M   2008011515 Juan de Garay 1111 3er piso dto A
+========================================================================================================================================
+Archivo 2: Todos los campos de este archivo son de longitud fija.
+Pérez Juan#2008021130#Corrientes 348#González Ana M#2008011515#Juan de Garay 1111 3er piso Dto A#
+========================================================================================================================================
+Archivo 3: Todos los campos de este archivo están precedidos de un número de dos dígitos que indica la longitud del campo a leer.
+10Pérez Juan10200802113014Corrientes 34814González Ana M10200801151534Juan de Garay 1111 3er piso dto A
+========================================================================================================================================
