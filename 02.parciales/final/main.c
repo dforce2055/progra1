@@ -18,25 +18,31 @@ int main(){
   peliculas[8] = agregarPelicula("The Godfather: Part II", "Francis Ford Coppola", "DRAMA", 10, 1974);
   peliculas[9] = agregarPelicula("The Dark Knight", "Christopher Nolan", "ACCION", 10, 2008);
 
-  
-
   while(opcion = menu()){
      switch (opcion){
       case 0:
         exit;
         break;
-      case 1: 
-        puts("Listado de Peliculas Ordenadas por año");
+      case 1:
+        puts("**********************************************");
+        puts("*** Listado de Peliculas Ordenadas por año ***");
+        puts("**********************************************");
         listarPeliculasOrdenadas(peliculas, CANTIDAD);
-        system("pause"); system("cls");
+        //system("pause"); system("cls");
+        system("sleep 3"); system("clear");
         break;
-      case 2: 
-        puts("Listado de Peliculas por año");
+      case 2:
+        puts("**********************************************");
+        puts("***     Listado de Peliculas por año       ***");
+        puts("**********************************************");
         listarPorAnio(peliculas);
         system("pause"); system("cls");
+        //system("sleep 3"); system("clear");
         break;
-      case 3: 
-        puts("Guardar listado de peliculas en disco");
+      case 3:
+        puts("**********************************************");
+        puts("*** Guardar listado de peliculas en disco  ***");
+        puts("**********************************************");
         if(guardarEnDisco(peliculas)){
           puts("*****************************");
           puts("***  Peliculas GUARDADAS  ***");
@@ -46,14 +52,16 @@ int main(){
           puts("***   ERROR AL GUARDAR    ***");
           puts("*****************************");
         }
-        system("pause");system("cls");
+        system("pause"); system("cls");
+        //system("sleep 3"); system("clear");
         break;
       case 4:
         peliculas[posicion] = cargarPelicula();
         posicion++;
         system("pause"); system("cls");
+        //system("slep 3"); system("clear");
         break;
-      default:  
+      default:
         system("cls");
         puts("*****************************");
         puts("***    Opcion invalida    ***");
@@ -61,8 +69,7 @@ int main(){
         system("pause");
         break;
     }
-  
+
   }
-  
   return 0;
 }

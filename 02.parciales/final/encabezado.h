@@ -16,7 +16,7 @@ Pelicula agregarPelicula(char *titulo, char *director, char *genero, int mes, in
 Pelicula cargarPelicula();
 int guardarEnDisco(Pelicula peliculas[]);
 void listarPorAnio(Pelicula peliculas[]);
-void mostrarAnios(int anios[], int largo);
+void mostrarAnios(int anios[], int largo, Pelicula peliculas[]);
 
 
 

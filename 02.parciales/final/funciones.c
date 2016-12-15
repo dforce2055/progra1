@@ -8,22 +8,22 @@ int menu(){
   int opcion = 1;
   puts("***    MENU DE PELICULAS   ***");
   puts("===============================");
-  puts("1- Mostrar todas las peliculas ordenas por a�o");
-  puts("2- Mostrar cantidad de peliculas de un a�o");
+  puts("1- Mostrar todas las peliculas ordenas por año");
+  puts("2- Mostrar cantidad de peliculas de un año");
   puts("3- Guardar listado de peliculas por genero en disco");
   puts("4- Agregar una nueva pelicula");
   puts("0- Salir");
   scanf("%d", &opcion);
   limpiarBuffer();
- 
+
   return opcion;
 }
 void mostrarPelicula(Pelicula pelicula){
   printf("Titulo: %s\n", pelicula.titulo);
   printf("Director: %s\n", pelicula.director);
   printf("Genero: %s\n", pelicula.genero);
-  printf("Lanzamiento: %d/%d\n", 
-          pelicula.mesLanzamiento, 
+  printf("Lanzamiento: %d/%d\n",
+          pelicula.mesLanzamiento,
           pelicula.anioLanzamiento);
   puts("=======================================");
 }
@@ -45,11 +45,13 @@ void listarPeliculasOrdenadas(Pelicula peliculas[], int cantidad){
           peliculas[j] = aux1;
         }
       }
-      
+
     }
   }
-  for(i = 0; i < cantidad; i++)
-    mostrarPelicula(peliculas[i]);
+  for(i = 0; i < cantidad; i++){
+    if(peliculas[i].anioLanzamiento > 0)
+      mostrarPelicula(peliculas[i]);
+  }
 }
 Pelicula agregarPelicula(char *titulo, char *director, char *genero, int mes, int anio){
   Pelicula nuevaPelicula;
@@ -82,8 +84,8 @@ Pelicula cargarPelicula(){
   printf("Mes? ");
   scanf("%d", &mes);
   limpiarBuffer();
-  
-  printf("A�o? ");
+
+  printf("Año? ");
   scanf("%d", &anio);
   limpiarBuffer();
 
@@ -97,12 +99,13 @@ int guardarEnDisco(Pelicula peliculas[]){
   else{
     int i;
     char genero[80];
-    
-    printf("Que genero de Pelicula desea guardar?");
+
+    printf("Que genero de Pelicula desea guardar? ");
     fgets(genero, 79, stdin);
     borrarSalto(genero);
     mayus(genero);
     fprintf(archivo, "Listado de Peliculas por genero '%s'\n", genero);
+    fprintf(archivo, "=====================================", genero);
 
     for(i = 0; i < CANTIDAD; i++){
       if(strncmp(peliculas[i].genero, genero, 3) == 0)
@@ -115,13 +118,7 @@ int guardarEnDisco(Pelicula peliculas[]){
   return 1;
 }
 void listarPorAnio(Pelicula peliculas[]){
-  int anios[100] = {0};
-              /*{2016, 2015, 2014, 2013, 2012, 2011, 2010, 
-                 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000,                        1999, 1998, 1997, 1996, 1995, 1994, 1993, 1992, 1991, 1990,
-                 1989, 1988, 1987, 1986, 1985, 1984, 1983, 1982, 1981, 1980,
-                 1979, 1978, 1977, 1976, 1975, 1974, 1973, 1972, 1971, 1970,
-                 1969, 1968, 1967, 1966, 1965, 1964, 1963, 1962, 1961, 1960};*/
-  
+  int anios[100] = {0};//Vector de 0 a 99, 100 años
   int i;
 
   for(i = 0; i < CANTIDAD; i++){
@@ -129,19 +126,33 @@ void listarPorAnio(Pelicula peliculas[]){
     anios[2016 - peliculas[i].anioLanzamiento]++;//sumo 1 en la posicion del vector.
   }
 
- mostrarAnios(anios, CANTIDAD);
-  
-
+  mostrarAnios(anios, 100, peliculas);
 }
-void mostrarAnios(int anios[], int largo){
-  int i;
+void mostrarAnios(int anios[], int largo, Pelicula peliculas[]){
+  int i, j = 0, aux = 0;
+  char years[100][5];
   for(i = 0; i < largo; i++){
     if(anios[i] != 0){
-      printf("a�o %d : %d Peliculas\n", 2016 - i, anios[i]); 
+      printf("año %d : %d Peliculas\n", 2016 - i, anios[i]);
+      sprintf(years[j], "%d", 2016 - i);
+      j++;
     }
   }
+  j--;
+  while(j >= 0){
+    if(years[j]){
+      //puts(years[j]);
+      sscanf(years[j], "%d", &aux);
+      for(i = 0; i < CANTIDAD; i++){
+        if(peliculas[i].anioLanzamiento == aux){
+          printf("%s -> %d\t", peliculas[i].titulo, peliculas[i].anioLanzamiento);
+        }
+      }
+      printf("\n");
+    }
+    j--;
+  }
 }
-
 //AUX
 void limpiarBuffer(void){
   while(fgetc(stdin) != '\n');
@@ -152,6 +163,6 @@ void borrarSalto(char *cadena){
 void mayus(char *cadena){
   int largo = strlen(cadena), i = 0;
   for(i = 0; i < largo; i++){
-    cadena[i] = toupper(cadena[i]);
+cadena[i] = toupper(cadena[i]);
   }
 }
